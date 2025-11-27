@@ -1,65 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Portfolio - Visuals by Marvin</title>
+    <title>VisualsByMarvin | Digital Design</title>
     <meta name="description" content="Crafting Design that drives Sales & puts your idea into the digital Spotlight.">
-    
     <link rel="icon" type="image/svg+xml" href="images/My_Logo.svg">
     
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     },
                     colors: {
-                        'page-bg': '#EFE6FF',
-                        'page-text': '#605389',
-                        'brand-start': '#614BDF',
-                        'brand-end': '#BE82FF',
-                        brand: {
-                            50: '#F5F3FF',
-                            100: '#EDE9FE',
-                            200: '#DDD6FE',
-                            500: '#8B5CF6',
-                            600: '#7C3AED',
-                            900: '#4C1D95',
+                        bg: {
+                            main: 'var(--bg-main)', 
                         },
-                        'stat-pink': '#FFA6A6',
-                        'stat-blue': '#A6B1FF',
+                        brand: {
+                            primary: '#8B5CF6',   // Purple
+                            secondary: '#D946EF', // Pink
+                            tertiary: '#06B6D4',  // Cyan
+                        }
                     },
                     animation: {
-                        'fade-in': 'fadeIn 0.5s ease-out forwards',
-                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'blob': 'blob 7s infinite',
                         'scroll': 'scroll 30s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
                     },
                     keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         },
                         scroll: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
-                    },
-                    backgroundImage: {
-                        'noise-pattern': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E\")",
                     }
                 }
             }
@@ -67,395 +65,522 @@
     </script>
 
     <style>
-        body { scroll-behavior: smooth; }
+        /* CSS VARIABLES FOR THEMING */
+        :root {
+            /* Light Mode Defaults */
+            --bg-main: #F8FAFC;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --glass-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            
+            --glass-hover-bg: rgba(255, 255, 255, 0.9);
+            --glass-hover-border: rgba(139, 92, 246, 0.3);
+        }
+
+        .dark {
+            /* Dark Mode Overrides */
+            --bg-main: #0B0A16;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-shadow: none;
+            --nav-bg: rgba(11, 10, 22, 0.8);
+
+            --glass-hover-bg: rgba(255, 255, 255, 0.08);
+            --glass-hover-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #EFE6FF; }
-        ::-webkit-scrollbar-thumb { background: #C4B5FD; border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-main); }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background: #332E4D; }
         ::-webkit-scrollbar-thumb:hover { background: #8B5CF6; }
 
-        .bento-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .bento-card:hover {
+        /* Glass Utility */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-hover:hover {
+            background: var(--glass-hover-bg);
+            border-color: var(--glass-hover-border);
             transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(97, 75, 223, 0.1), 0 4px 6px -2px rgba(97, 75, 223, 0.05);
-            border-color: #BE82FF;
+            box-shadow: 0 10px 30px -5px rgba(139, 92, 246, 0.15);
         }
 
+        /* FIXED TEXT GRADIENT CLASSES 
+           Removed 'transform' and 'inline-block' to prevent stacking context bugs.
+        */
         .text-gradient {
-            background: linear-gradient(to right, #614BDF, #BE82FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent;
+            background: linear-gradient(to right, #7C3AED, #D946EF);
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        .dark .text-gradient {
+            background: linear-gradient(to right, #8B5CF6, #D946EF);
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
         }
         
-        .bg-gradient-brand { background: linear-gradient(to right, #614BDF, #BE82FF); }
-        
+        .text-gradient-cyan {
+            background: linear-gradient(to right, #0891B2, #7C3AED);
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        .dark .text-gradient-cyan {
+            background: linear-gradient(to right, #06B6D4, #8B5CF6);
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
+        }
+
         .marquee-mask {
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
-
-        /* Review Transition Class */
-        .review-content { transition: opacity 0.5s ease-in-out; }
-        .opacity-0 { opacity: 0; }
     </style>
 </head>
-<body class="bg-page-bg text-page-text antialiased selection:bg-[#BE82FF] selection:text-white">
+<body class="selection:bg-brand-secondary selection:text-white relative">
 
-    <nav class="fixed top-0 w-full z-50 bg-page-bg/90 backdrop-blur-md border-b border-white/50">
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-primary/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[128px] animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-brand-secondary/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[128px] animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-10%] left-[20%] w-96 h-96 bg-brand-tertiary/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[128px] animate-blob animation-delay-4000"></div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-50 border-b border-gray-200 dark:border-white/5 backdrop-blur-xl transition-colors duration-300" style="background-color: var(--nav-bg);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="index.html" class="flex-shrink-0 flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <img src="images/My_Logo.svg" alt="Logo" class="w-8 h-8 object-contain">
-                    <span class="font-bold text-lg tracking-tight text-page-text">VisualsByMarvin.</span>
+            <div class="flex justify-between items-center h-20">
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative w-10 h-10">
+                        <div class="absolute inset-0 bg-brand-primary/20 dark:bg-brand-primary/50 blur-lg rounded-full group-hover:bg-brand-secondary/50 transition-colors"></div>
+                        <img src="images/My_Logo.svg" alt="Logo" class="relative z-10 w-full h-full object-contain">
+                    </div>
+                    <span class="font-bold text-lg tracking-wide text-slate-800 dark:text-white">VisualsByMarvin<span class="text-brand-primary">.</span></span>
                 </a>
 
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#work" class="text-sm font-medium text-page-text hover:text-[#614BDF] transition-colors">Work</a>
-                    <a href="#services" class="text-sm font-medium text-page-text hover:text-[#614BDF] transition-colors">Services</a>
-                    <a href="#about" class="text-sm font-medium text-page-text hover:text-[#614BDF] transition-colors">About</a>
-                    <a href="#contact" class="px-4 py-2 text-sm font-medium text-white bg-gradient-brand rounded-lg hover:opacity-90 transition-opacity shadow-sm">
-                        Contact me
+                <div class="hidden md:flex items-center gap-6">
+                    <div class="flex items-center gap-6 mr-4">
+                        <a href="#work" class="text-sm font-medium text-slate-600 dark:text-gray-400 hover:text-brand-primary dark:hover:text-white transition-colors">Work</a>
+                        <a href="#services" class="text-sm font-medium text-slate-600 dark:text-gray-400 hover:text-brand-primary dark:hover:text-white transition-colors">Services</a>
+                        <a href="#about" class="text-sm font-medium text-slate-600 dark:text-gray-400 hover:text-brand-primary dark:hover:text-white transition-colors">About</a>
+                    </div>
+                    
+                    <button id="theme-toggle" class="p-2.5 rounded-full bg-slate-200/50 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 text-slate-700 dark:text-yellow-400 transition-all focus:outline-none ring-offset-2 focus:ring-2 ring-brand-primary">
+                        <i class="ph-fill ph-sun text-xl hidden dark:block"></i>
+                        <i class="ph-fill ph-moon text-xl block dark:hidden text-brand-primary"></i>
+                    </button>
+
+                    <a href="#contact" class="px-5 py-2.5 text-sm font-bold text-white bg-[#0B0A16] dark:bg-white/10 border border-transparent dark:border-white/10 rounded-full hover:bg-brand-primary hover:border-brand-primary dark:hover:bg-brand-primary transition-all duration-300 shadow-lg dark:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                        Let's Talk
                     </a>
                 </div>
 
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-page-text hover:text-[#614BDF] focus:outline-none">
+                <div class="flex items-center gap-4 md:hidden">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full text-slate-700 dark:text-yellow-400">
+                         <i class="ph-fill ph-sun text-xl hidden dark:block"></i>
+                         <i class="ph-fill ph-moon text-xl block dark:hidden"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-slate-800 dark:text-white p-2">
                         <i class="ph ph-list text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-page-bg border-b border-white/50">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#work" class="block px-3 py-2 rounded-md text-base font-medium text-page-text hover:text-[#614BDF] hover:bg-white/50">Work</a>
-                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-page-text hover:text-[#614BDF] hover:bg-white/50">Services</a>
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-page-text hover:text-[#614BDF] hover:bg-white/50">About</a>
-                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-[#614BDF] font-bold bg-white/50">Contact me</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-50 dark:bg-[#0B0A16] border-b border-gray-200 dark:border-white/10 shadow-xl">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#work" class="block px-3 py-3 rounded-xl text-base font-medium text-slate-600 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-white/5">Work</a>
+                <a href="#services" class="block px-3 py-3 rounded-xl text-base font-medium text-slate-600 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-white/5">Services</a>
+                <a href="#about" class="block px-3 py-3 rounded-xl text-base font-medium text-slate-600 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-white/5">About</a>
+                <a href="#contact" class="block px-3 py-3 rounded-xl text-base font-bold text-white bg-brand-primary">Contact me</a>
             </div>
         </div>
     </nav>
 
-    <main class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
+    <main class="relative z-10 pt-32 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-24">
 
-        <section class="relative pt-20 pb-24 flex flex-col items-center text-center">
+        <section class="relative flex flex-col items-center text-center">
             
-            <img src="images/My_Logo.svg" alt="My Logo" class="h-16 mb-10 hover:scale-105 transition-transform duration-300">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 backdrop-blur-md mb-8 animate-fade-in-up shadow-sm">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span class="text-xs font-semibold tracking-wider text-slate-600 dark:text-gray-300 uppercase">Available for new projects</span>
+            </div>
 
-            <p class="text-2xl md:text-3xl font-medium text-page-text mb-8">
-                Hi 👋 my name is Marvin & I'm
-            </p>
-
-            <div class="relative max-w-5xl mx-auto mb-10">
-                <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight text-page-text leading-tight">
-                    Crafting 
-                    <span class="relative inline-block mx-3">
-                        <span class="relative z-10 text-white px-4 py-1">Design</span>
-                        <span class="absolute inset-0 bg-gradient-brand rounded-xl -rotate-2 top-1 bottom-1 left-0 right-0 z-0"></span>
-                        <span class="absolute inset-0 bg-[#614BDF] rounded-xl rotate-1 z-0"></span>
-                        
-                        <div class="absolute top-[-5.5rem] -right-52 hidden md:block animate-slide-up z-20">
-                            <img src="images/Bubble.svg" class="w-56 hover:-translate-y-2 hover:rotate-2 transition-all duration-300 drop-shadow-xl cursor-pointer" alt="Client Feedback">
-                        </div>
-                    </span>
-                    that <br> drives 
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-8 leading-[1.1]">
+                Crafting Design<br>
+                that drives 
+                <span class="relative inline-block">
                     <span class="text-gradient">Sales.</span>
-                </h1>
-            </div>
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-brand-secondary opacity-80" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00025 6.99997C25.7501 9.7562 73.2502 9.24398 127.25 6.12633C153.932 4.58575 169.648 1.93983 197.922 2.00055" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+                </span>
+            </h1>
 
-            <p class="max-w-3xl mx-auto text-xl text-page-text/80 leading-relaxed mb-16">
-                Experience in Graphic Design, Marketing Ads & interested in No-Code & AI-driven Web Development - this makes me your perfect partner.
+            <p class="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 dark:text-gray-400 leading-relaxed mb-10">
+                Hi, I'm <span class="text-slate-900 dark:text-white font-bold">Marvin</span>. I blend <span class="text-brand-tertiary font-medium">Graphic Design</span>, <span class="text-brand-secondary font-medium">Marketing Ads</span> & <span class="text-brand-primary font-medium">AI-driven Dev</span> to put your idea in the digital spotlight.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mb-24">
-                <div class="bg-[#C4B5FD] rounded-3xl p-8 text-white text-left relative overflow-hidden group hover:scale-[1.02] transition-transform">
-                    <div class="relative z-10">
-                        <h3 class="text-4xl font-extrabold mb-2">1.080.865+</h3>
-                        <p class="font-bold text-xl mb-3">Impressions</p>
-                        <p class="text-base opacity-90">collected with my Designs.<br>Make yours everlasting.</p>
-                    </div>
-                    <i class="ph-bold ph-eye absolute right-6 top-1/2 -translate-y-1/2 text-white/30 text-8xl group-hover:scale-110 transition-transform"></i>
-                </div>
+            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <a href="#work" class="px-8 py-4 rounded-2xl bg-[#0B0A16] dark:bg-white text-white dark:text-black font-bold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2 shadow-xl shadow-brand-primary/20">
+                    View Work <i class="ph-bold ph-arrow-right"></i>
+                </a>
+                <a href="#contact" class="px-8 py-4 rounded-2xl glass text-slate-700 dark:text-white font-medium hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+                    Book a Call
+                </a>
+            </div>
 
-                <div class="bg-[#A6B1FF] rounded-3xl p-8 text-white text-left relative overflow-hidden group hover:scale-[1.02] transition-transform">
-                    <div class="relative z-10">
-                        <h3 class="text-4xl font-extrabold mb-2">98%</h3>
-                        <p class="font-bold text-xl mb-3">Happy Clients</p>
-                        <p class="text-base opacity-90">through a personalised and<br>userfriendly process.</p>
-                    </div>
-                    <i class="ph-bold ph-smiley absolute right-6 top-1/2 -translate-y-1/2 text-white/30 text-8xl group-hover:scale-110 transition-transform"></i>
-                </div>
+            <div class="absolute top-0 right-[10%] hidden lg:block animate-float">
+                <img src="images/Bubble.svg" class="w-48 drop-shadow-2xl opacity-90 hover:opacity-100 transition-opacity" alt="Decoration">
+            </div>
 
-                <div class="bg-[#FFA6A6] rounded-3xl p-8 text-white text-left relative overflow-hidden group hover:scale-[1.02] transition-transform">
-                    <div class="relative z-10">
-                        <h3 class="text-4xl font-extrabold mb-2">6+</h3>
-                        <p class="font-bold text-xl mb-3">Years</p>
-                        <p class="text-base opacity-90">of dedicated passion and<br>experience in design.</p>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="glass p-6 rounded-3xl relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-br from-brand-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="relative z-10">
+                    <div class="text-4xl font-bold text-slate-900 dark:text-white mb-1">1.08M+</div>
+                    <div class="text-sm font-medium text-brand-primary uppercase tracking-wider mb-2">Impressions</div>
+                    <p class="text-sm text-slate-500 dark:text-gray-400">Collected with my designs. Make yours everlasting.</p>
+                </div>
+            </div>
+             <div class="glass p-6 rounded-3xl relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-br from-brand-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="relative z-10">
+                    <div class="text-4xl font-bold text-slate-900 dark:text-white mb-1">98%</div>
+                    <div class="text-sm font-medium text-brand-secondary uppercase tracking-wider mb-2">Happy Clients</div>
+                    <p class="text-sm text-slate-500 dark:text-gray-400">Through a personalised and user-friendly process.</p>
+                </div>
+            </div>
+             <div class="glass p-6 rounded-3xl relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-br from-brand-tertiary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="relative z-10">
+                    <div class="text-4xl font-bold text-slate-900 dark:text-white mb-1">6+</div>
+                    <div class="text-sm font-medium text-brand-tertiary uppercase tracking-wider mb-2">Years Exp.</div>
+                    <p class="text-sm text-slate-500 dark:text-gray-400">Of dedicated passion and experience in design.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full overflow-hidden marquee-mask py-4 border-y border-gray-200 dark:border-white/5 bg-slate-100/50 dark:bg-white/[0.02]">
+            <div class="flex items-center gap-16 w-max animate-scroll">
+                <img src="images/SunDevs_Logo.png" class="h-8 md:h-10 opacity-40 hover:opacity-100 grayscale hover:grayscale-0 dark:brightness-200 transition-all duration-300" alt="SunDevs">
+                <img src="images/ByAlexgg_Logo.png" class="h-8 md:h-10 opacity-40 hover:opacity-100 grayscale hover:grayscale-0 dark:brightness-200 transition-all duration-300" alt="ByAlexgg">
+                <img src="images/ChromieCraft_Logo.png" class="h-8 md:h-10 opacity-40 hover:opacity-100 grayscale hover:grayscale-0 dark:brightness-200 transition-all duration-300" alt="ChromieCraft">
+                <img src="images/AzerothCore_Logo.png" class="h-8 md:h-10 opacity-40 hover:opacity-100 grayscale hover:grayscale-0 dark:brightness-200 transition-all duration-300" alt="AzerothCore">
+                <img src="images/SunDevs_Logo.png" class="h-8 md:h-10 opacity-40 hover:opacity-100 grayscale hover:grayscale-0 dark:brightness-200 transition-all duration-300" alt="SunDevs">
+                <img src="images/ByAlexgg_Logo.png" class="h-8 md:h-10 opacity-40 hover:opacity-100 grayscale hover:grayscale-0 dark:brightness-200 transition-all duration-300" alt="ByAlexgg">
+                <img src="images/ChromieCraft_Logo.png" class="h-8 md:h-10 opacity-40 hover:opacity-100 grayscale hover:grayscale-0 dark:brightness-200 transition-all duration-300" alt="ChromieCraft">
+                <img src="images/AzerothCore_Logo.png" class="h-8 md:h-10 opacity-40 hover:opacity-100 grayscale hover:grayscale-0 dark:brightness-200 transition-all duration-300" alt="AzerothCore">
+            </div>
+        </div>
+
+        <section id="about" class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            
+            <div class="md:col-span-8 glass p-8 rounded-3xl flex flex-col justify-between min-h-[400px] relative overflow-hidden group glass-hover transition-all duration-300">
+                <div class="relative z-10 max-w-lg">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+                        Transforming ideas into <span class="text-gradient-cyan">digital reality</span>.
+                    </h2>
+                    <p class="text-slate-600 dark:text-gray-400 text-lg mb-8 leading-relaxed">
+                        I've helped <span class="text-slate-900 dark:text-white font-bold">18+ Companies and Creators</span> present their products better than ever before. Beyond the pixels, I focus on the user journey and conversion.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-3 py-1 bg-slate-200/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg text-sm text-slate-700 dark:text-gray-300">UX Research</span>
+                        <span class="px-3 py-1 bg-slate-200/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg text-sm text-slate-700 dark:text-gray-300">Visual Identity</span>
+                        <span class="px-3 py-1 bg-slate-200/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg text-sm text-slate-700 dark:text-gray-300">Strategy</span>
                     </div>
-                    <i class="ph-bold ph-heart absolute right-6 top-1/2 -translate-y-1/2 text-white/30 text-8xl group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="absolute -right-20 -bottom-40 w-80 h-80 bg-brand-secondary rounded-full blur-[100px] opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+            </div>
+
+            <div class="md:col-span-4 glass p-8 rounded-3xl flex flex-col items-center justify-center text-center relative overflow-hidden glass-hover transition-all duration-300">
+                <div class="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-brand-primary to-brand-secondary mb-6 relative z-10">
+                    <img src="images/marvin.jpg" alt="Marvin" class="w-full h-full object-cover rounded-full border-4 border-white dark:border-[#161425]">
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-1">Marvin</h3>
+                <p class="text-brand-primary font-medium text-sm mb-4">Mediadesign Student (7th Sem)</p>
+                
+                <div class="flex gap-4 mt-2">
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-200/50 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-gray-300 hover:bg-brand-primary hover:text-white transition-all"><i class="ph-fill ph-behance-logo text-xl"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-200/50 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-gray-300 hover:bg-brand-primary hover:text-white transition-all"><i class="ph-fill ph-instagram-logo text-xl"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-200/50 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-gray-300 hover:bg-brand-primary hover:text-white transition-all"><i class="ph-fill ph-linkedin-logo text-xl"></i></a>
                 </div>
             </div>
 
-            <div class="w-full max-w-5xl overflow-hidden marquee-mask">
-                <div class="flex items-center gap-12 w-max animate-scroll">
-                    <img src="images/SunDevs_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="SunDevs">
-                    <img src="images/ByAlexgg_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ByAlexgg">
-                    <img src="images/ChromieCraft_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ChromieCraft">
-                    <img src="images/AzerothCore_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="AzerothCore">
-                    
-                    <img src="images/SunDevs_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="SunDevs">
-                    <img src="images/ByAlexgg_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ByAlexgg">
-                    <img src="images/ChromieCraft_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ChromieCraft">
-                    <img src="images/AzerothCore_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="AzerothCore">
+        </section>
 
-                    <img src="images/SunDevs_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="SunDevs">
-                    <img src="images/ByAlexgg_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ByAlexgg">
-                    <img src="images/ChromieCraft_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ChromieCraft">
-                    <img src="images/AzerothCore_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="AzerothCore">
+        <section id="services" class="space-y-8">
+            <div class="flex items-end justify-between border-b border-slate-200 dark:border-white/10 pb-4">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Services</h2>
+                <span class="text-sm text-slate-500 dark:text-gray-500">What I can do for you</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass p-8 rounded-3xl glass-hover group cursor-default">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-primary/10 dark:bg-brand-primary/20 text-brand-primary flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-desktop"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Marketing Ads</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">
+                        High-converting creatives for your new product, promotion, or web store offer. I design to stop the scroll.
+                    </p>
+                </div>
+
+                <div class="glass p-8 rounded-3xl glass-hover group cursor-default">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-secondary/10 dark:bg-brand-secondary/20 text-brand-secondary flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">UI & Presentation</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">
+                        You worked hard on your product. I make sure it shines with professional UI design and pitch presentations.
+                    </p>
+                </div>
+
+                <div class="glass p-8 rounded-3xl flex flex-col justify-center">
+                    <h3 class="text-sm font-bold text-slate-500 dark:text-gray-500 uppercase tracking-wider mb-6">My Arsenal</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="ph-fill ph-figma-logo text-slate-800 dark:text-white text-xl"></i>
+                                <span class="text-slate-700 dark:text-gray-300 font-medium">Figma</span>
+                            </div>
+                            <div class="flex gap-1">
+                                <div class="w-1.5 h-6 rounded-full bg-brand-primary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-brand-primary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-brand-primary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-brand-primary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-slate-300 dark:bg-white/10"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="ph-bold ph-framer-logo text-slate-800 dark:text-white text-xl"></i>
+                                <span class="text-slate-700 dark:text-gray-300 font-medium">Framer</span>
+                            </div>
+                            <div class="flex gap-1">
+                                <div class="w-1.5 h-6 rounded-full bg-brand-primary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-brand-primary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-brand-primary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-brand-primary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-slate-300 dark:bg-white/10"></div>
+                            </div>
+                        </div>
+                         <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="ph-fill ph-magic-wand text-brand-secondary text-xl"></i>
+                                <span class="text-slate-700 dark:text-gray-300 font-medium">Photoshop</span>
+                            </div>
+                            <div class="flex gap-1">
+                                <div class="w-1.5 h-6 rounded-full bg-brand-secondary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-brand-secondary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-brand-secondary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-brand-secondary"></div>
+                                <div class="w-1.5 h-6 rounded-full bg-slate-300 dark:bg-white/10"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div id="about" class="grid grid-cols-1 md:grid-cols-12 gap-6 scroll-mt-24">
-            <div class="md:col-span-8 bento-card bg-white rounded-3xl p-8 border border-white/60 flex flex-col justify-between min-h-[300px] relative overflow-hidden group shadow-sm">
-                <div class="relative z-10 max-w-lg">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-page-bg text-[#614BDF] text-xs font-bold uppercase tracking-wider mb-4">
-                        <span class="w-2 h-2 rounded-full bg-[#614BDF] animate-pulse"></span>
-                        About me & my work
-                    </div>
-                    <h2 class="text-4xl font-bold tracking-tight text-page-text mb-4 leading-tight">
-                        Transforming your ideas into <span class="text-gradient">digital reality</span>.
-                    </h2>
-                    <p class="text-page-text/80 mb-6 max-w-md">
-                        I've already helped <span class="text-gradient">18+ Companies, Individuals and Digital Creatives</span> in presenting their products better than ever before!
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#work" class="px-6 py-3 bg-gradient-brand text-white rounded-xl font-medium hover:opacity-90 transition-opacity shadow-lg shadow-purple-500/20">
-                            View Recent Work
-                        </a>
-                    </div>
+        <section id="work">
+            <div class="flex items-end justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Selected Work</h2>
+                    <p class="text-slate-600 dark:text-gray-400">A glimpse into my recent projects.</p>
                 </div>
-                <div class="absolute -right-20 -bottom-40 w-80 h-80 bg-gradient-to-br from-[#614BDF] to-[#BE82FF] rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
-            </div>
-
-            <div class="md:col-span-4 flex flex-col gap-6">
-                <div class="bento-card bg-white rounded-3xl p-6 border border-white/60 flex-1 flex flex-col items-center text-center justify-center relative overflow-hidden shadow-sm">
-                    <div class="w-32 h-32 rounded-full bg-page-bg mb-4 overflow-hidden border-4 border-white shadow-md relative z-10">
-                        <img src="images/marvin.jpg" alt="Marvin" class="w-full h-full object-cover">
-                    </div>
-                    <h2 class="text-xl font-bold text-page-text">Marvin, 🇬🇷</h2>
-                    <p class="text-sm text-page-text/70 mb-4">B.A. Mediadesign Student <br>(7th Semester)</p>
-                    <div class="flex gap-3">
-                        <a href="#" class="w-10 h-10 rounded-full bg-page-bg flex items-center justify-center text-page-text hover:bg-gradient-brand hover:text-white transition-all"><i class="ph-fill ph-behance-logo text-xl"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-page-bg flex items-center justify-center text-page-text hover:bg-gradient-brand hover:text-white transition-all"><i class="ph-fill ph-instagram-logo text-xl"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="services">
-            <div class="bento-card bg-white rounded-3xl p-6 border border-white/60 shadow-sm">
-                <div class="w-12 h-12 rounded-xl bg-page-bg text-[#614BDF] flex items-center justify-center mb-4">
-                    <i class="ph-duotone ph-desktop text-2xl"></i>
-                </div>
-                <h3 class="text-lg font-bold text-page-text mb-2">Marketing Ads (Design)</h3>
-                <p class="text-sm text-page-text/80 leading-relaxed">
-                    Whether it's for your new product, a promotion, or simply an offer in your web store, I'll take care of it.
-                </p>
-            </div>
-
-            <div class="bento-card bg-white rounded-3xl p-6 border border-white/60 shadow-sm">
-                <div class="w-12 h-12 rounded-xl bg-page-bg text-[#BE82FF] flex items-center justify-center mb-4">
-                    <i class="ph-duotone ph-rocket text-2xl"></i>
-                </div>
-                <h3 class="text-lg font-bold text-page-text mb-2">Product Presentation / UI Design</h3>
-                <p class="text-sm text-page-text/80 leading-relaxed">
-                    You worked hard on your project/product. Now it's time to put it in the right light. Let me help you put your idea in the digital spotlight.
-                </p>
-            </div>
-
-            <div class="bento-card bg-white rounded-3xl p-6 border border-white/60 flex flex-col shadow-sm">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-sm font-bold text-page-text/60 uppercase tracking-wider">My Toolkit</h3>
-                    <span class="text-xs text-page-text/60 font-medium">Skill Level</span>
-                </div>
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between group cursor-default">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-page-bg flex items-center justify-center"><i class="ph-fill ph-figma-logo text-[#614BDF] text-xl"></i></div>
-                            <span class="font-medium text-page-text">Figma</span>
-                        </div>
-                        <div class="flex gap-1">
-                            <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
-                            <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
-                            <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
-                            <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
-                            <div class="w-2 h-2 rounded-full bg-gray-200"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between group cursor-default">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-page-bg flex items-center justify-center"><i class="ph-bold ph-framer-logo text-page-text text-xl"></i></div>
-                            <span class="font-medium text-page-text">Framer</span>
-                        </div>
-                        <div class="flex gap-1">
-                            <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
-                            <div class="w-2 h-2 rounded-full bg-gray-200"></div>
-                            <div class="w-2 h-2 rounded-full bg-gray-200"></div>
-                            <div class="w-2 h-2 rounded-full bg-gray-200"></div>
-                            <div class="w-2 h-2 rounded-full bg-gray-200"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between group cursor-default">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-page-bg flex items-center justify-center"><i class="ph-fill ph-magic-wand text-[#BE82FF] text-xl"></i></div>
-                            <span class="font-medium text-page-text">Photoshop</span>
-                        </div>
-                        <div class="flex gap-1">
-                            <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
-                            <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
-                            <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
-                            <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
-                            <div class="w-2 h-2 rounded-full bg-gray-200"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="work">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold text-page-text">Selected Work</h2>
-                <a href="projects.html" class="text-sm font-medium text-[#614BDF] hover:text-[#BE82FF] flex items-center gap-1 transition-colors">
+                <a href="projects.html" class="hidden md:flex items-center gap-2 text-brand-primary hover:text-brand-secondary transition-colors font-medium">
                     View all projects <i class="ph-bold ph-arrow-right"></i>
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bento-card group bg-white rounded-3xl p-4 border border-white/60 cursor-pointer shadow-sm">
-                    <div class="aspect-video w-full bg-page-bg rounded-2xl overflow-hidden relative mb-4">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-[#EFE6FF] to-white flex items-center justify-center text-[#c4b5fd] group-hover:scale-105 transition-transform duration-500">
-                             <i class="ph-fill ph-image text-4xl"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="group cursor-pointer">
+                    <div class="glass rounded-3xl overflow-hidden aspect-video relative mb-4 border-0">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-[#1a162e] to-[#2d2447] group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
+                            <i class="ph-fill ph-image text-5xl text-white/20"></i>
                         </div>
                         <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 bg-white/90 backdrop-blur text-xs font-bold text-page-text rounded-full shadow-sm">Product Presentation</span>
+                             <span class="px-3 py-1 bg-white/90 dark:bg-black/50 backdrop-blur border border-white/10 rounded-full text-xs font-bold text-slate-800 dark:text-white">Product Presentation</span>
                         </div>
                     </div>
-                    <div class="px-2 pb-2">
-                        <h3 class="text-xl font-bold text-page-text mb-1">Coming soon...</h3>
-                        <p class="text-page-text/80 text-sm">I will place a design here later, its to be done.</p>
-                        <div class="mt-4 flex gap-2">
-                            <span class="px-2 py-1 bg-page-bg text-xs text-page-text rounded-md border border-white">UI Design</span>
-                        </div>
-                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand-primary transition-colors">Coming soon...</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm mt-1">I will place a design here later.</p>
                 </div>
 
-                <div class="bento-card group bg-white rounded-3xl p-4 border border-white/60 cursor-pointer shadow-sm">
-                    <div class="aspect-video w-full bg-page-text rounded-2xl overflow-hidden relative mb-4">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-[#605389] to-[#8d7eb8] flex items-center justify-center text-white/50 group-hover:scale-105 transition-transform duration-500">
-                            <i class="ph-fill ph-circles-three-plus text-4xl"></i>
+                <div class="group cursor-pointer">
+                    <div class="glass rounded-3xl overflow-hidden aspect-video relative mb-4 border-0">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-[#1a162e] to-[#2d2447] group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
+                            <i class="ph-fill ph-circles-three-plus text-5xl text-white/20"></i>
                         </div>
                         <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 bg-white/90 backdrop-blur text-xs font-bold text-page-text rounded-full shadow-sm">Web Design</span>
+                             <span class="px-3 py-1 bg-white/90 dark:bg-black/50 backdrop-blur border border-white/10 rounded-full text-xs font-bold text-slate-800 dark:text-white">Web Design</span>
                         </div>
                     </div>
-                    <div class="px-2 pb-2">
-                        <h3 class="text-xl font-bold text-page-text mb-1">Coming soon...</h3>
-                        <p class="text-page-text/80 text-sm">I will place a design here later, its to be done.</p>
-                        <div class="mt-4 flex gap-2">
-                            <span class="px-2 py-1 bg-page-bg text-xs text-page-text rounded-md border border-white">UI Design</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-            
-            <div class="md:col-span-7 bento-card bg-white rounded-3xl p-8 border border-white/60 flex flex-col justify-center shadow-sm">
-                <div class="mb-6">
-                     <span class="text-[#614BDF] text-xs font-bold uppercase tracking-wider">How I Work</span>
-                     <h2 class="text-2xl font-bold text-page-text mt-2">Design is a process, not just a result.</h2>
-                </div>
-                <div class="space-y-6 relative">
-                    <div class="absolute left-3.5 top-2 bottom-2 w-0.5 bg-page-bg"></div>
-                    <div class="relative pl-10">
-                        <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-white border-2 border-[#BE82FF] flex items-center justify-center z-10">
-                            <div class="w-2.5 h-2.5 rounded-full bg-[#614BDF]"></div>
-                        </div>
-                        <h4 class="font-bold text-page-text">Discovery</h4>
-                        <p class="text-sm text-page-text/80 mt-1">We discuss your goals, your ideas for the Design & what you want to show off.</p>
-                    </div>
-                    <div class="relative pl-10">
-                        <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center z-10">
-                            <div class="w-2.5 h-2.5 rounded-full bg-gray-300"></div>
-                        </div>
-                        <h4 class="font-bold text-page-text">Exploration</h4>
-                        <p class="text-sm text-page-text/80 mt-1">Updates on visual directions, interim results, close communication between us.</p>
-                    </div>
-                    <div class="relative pl-10">
-                        <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center z-10">
-                            <div class="w-2.5 h-2.5 rounded-full bg-gray-300"></div>
-                        </div>
-                        <h4 class="font-bold text-page-text">Delivery</h4>
-                        <p class="text-sm text-page-text/80 mt-1">Your final project delivery, after you approved interim results. The best way for you and me.</p>
-                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand-primary transition-colors">Coming soon...</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm mt-1">I will place a design here later.</p>
                 </div>
             </div>
 
-            <div class="md:col-span-5 bento-card bg-gradient-brand rounded-3xl p-8 text-white relative overflow-hidden flex flex-col justify-between shadow-lg shadow-purple-500/20">
-                <div class="absolute top-0 right-0 p-8 opacity-10">
-                    <i class="ph-fill ph-quotes text-8xl"></i>
-                </div>
-                
-                <div class="relative z-10 review-content" id="review-container">
-                    <div class="flex gap-1 text-white/80 mb-4">
-                        <i class="ph-fill ph-star"></i>
-                        <i class="ph-fill ph-star"></i>
-                        <i class="ph-fill ph-star"></i>
-                        <i class="ph-fill ph-star"></i>
-                        <i class="ph-fill ph-star"></i>
-                    </div>
-                    <p class="text-xl font-medium leading-relaxed mb-6" id="review-text">
-                        "Vouch for this man, 10/10. All their work is legit, well done, and amazing."
-                    </p>
-                </div>
-                
-                <div class="flex items-center gap-4 relative z-10 review-content" id="author-container">
-                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-bold" id="review-initials">Z</div>
-                    <div>
-                        <p class="font-bold" id="review-author">Zalbus</p>
-                        <p class="text-sm text-white/80" id="review-role">Customer, NovaForge Studios</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bento-card bg-[#2D2447] rounded-3xl p-12 text-center relative overflow-hidden shadow-sm mt-12" id="contact">
-            <div class="absolute inset-0 bg-noise-pattern opacity-10"></div>
-            <div class="relative z-10 max-w-2xl mx-auto">
-                <h2 class="text-3xl font-bold text-white mb-4">Want to see more details?</h2>
-                <p class="text-gray-300 mb-8">I can walk you through my design process in a personal conversation.</p>
-                <a href="index.html#contact" class="inline-block px-8 py-3 bg-gradient-brand text-white font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-purple-500/25">
-                    Contact me
+            <div class="mt-8 text-center md:hidden">
+                <a href="projects.html" class="inline-flex items-center gap-2 text-brand-primary hover:text-brand-secondary transition-colors font-medium">
+                    View all projects <i class="ph-bold ph-arrow-right"></i>
                 </a>
             </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass p-8 rounded-3xl flex flex-col justify-between min-h-[300px] relative overflow-hidden bg-brand-primary/5 dark:bg-transparent">
+                <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                    <i class="ph-fill ph-quotes text-8xl text-brand-primary dark:text-white"></i>
+                </div>
+                
+                <div>
+                    <div class="flex gap-1 text-brand-secondary mb-6">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    </div>
+                    <div class="relative min-h-[100px]">
+                        <p class="text-xl md:text-2xl font-medium text-slate-800 dark:text-white leading-relaxed transition-opacity duration-500" id="review-text">
+                            "Vouch for this man, 10/10. All their work is legit, well done, and amazing."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 mt-6 pt-6 border-t border-slate-200 dark:border-white/10">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center text-white font-bold text-lg" id="review-initials">Z</div>
+                    <div>
+                        <p class="font-bold text-slate-900 dark:text-white transition-opacity duration-500" id="review-author">Zalbus</p>
+                        <p class="text-sm text-slate-600 dark:text-gray-400 transition-opacity duration-500" id="review-role">Customer, NovaForge Studios</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-3xl">
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-8">How I Work</h3>
+                <div class="space-y-8 relative">
+                    <div class="absolute left-[15px] top-2 bottom-2 w-0.5 bg-slate-200 dark:bg-white/10"></div>
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-50 dark:bg-[#0B0A16] border border-brand-primary flex items-center justify-center z-10">
+                            <div class="w-2 h-2 rounded-full bg-brand-primary"></div>
+                        </div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-lg">Discovery</h4>
+                        <p class="text-sm text-slate-600 dark:text-gray-400 mt-1">We discuss goals, ideas, and what you want to show off.</p>
+                    </div>
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-50 dark:bg-[#0B0A16] border border-slate-300 dark:border-white/20 flex items-center justify-center z-10">
+                            <div class="w-2 h-2 rounded-full bg-slate-400 dark:bg-white/50"></div>
+                        </div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-lg">Exploration</h4>
+                        <p class="text-sm text-slate-600 dark:text-gray-400 mt-1">Updates on visual directions, interim results, and close communication.</p>
+                    </div>
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-50 dark:bg-[#0B0A16] border border-slate-300 dark:border-white/20 flex items-center justify-center z-10">
+                            <div class="w-2 h-2 rounded-full bg-slate-400 dark:bg-white/50"></div>
+                        </div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-lg">Delivery</h4>
+                        <p class="text-sm text-slate-600 dark:text-gray-400 mt-1">Your final project delivery. Pixel perfect and ready to launch.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <footer class="border-t border-white/40 pt-8 pb-12 mt-12">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <p class="text-sm text-page-text/50">© 2025 VisualsByMarvin. All rights reserved.</p>
-                <div class="flex gap-6 text-sm text-page-text/70">
-                    <a href="#" class="hover:text-[#614BDF]">Instagram</a>
-                    <a href="#" class="hover:text-[#614BDF]">Behance</a>
+        <div id="contact" class="glass p-12 rounded-[2.5rem] text-center relative overflow-hidden group mt-12">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-primary/10 via-brand-secondary/10 to-brand-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl"></div>
+            
+            <div class="relative z-10 max-w-2xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">Ready to create something <span class="text-gradient-cyan">amazing?</span></h2>
+                <p class="text-xl text-slate-600 dark:text-gray-300 mb-10">I'm currently available for new projects. Let's discuss how we can elevate your brand.</p>
+                
+                <form class="max-w-md mx-auto space-y-4 text-left" onsubmit="event.preventDefault(); alert('Message simulation!');">
+                    <div class="relative">
+                        <input type="email" name="email" id="email" class="w-full px-6 py-4 rounded-xl bg-white dark:bg-black/30 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all shadow-sm" placeholder="Enter your email address">
+                        <button type="submit" class="absolute right-2 top-2 bottom-2 px-6 bg-brand-primary hover:bg-brand-secondary text-white font-bold rounded-lg transition-colors">
+                            Start
+                        </button>
+                    </div>
+                </form>
+                
+                <p class="mt-8 text-sm text-slate-500 dark:text-gray-500">
+                    Prefer email? <a href="mailto:hello@example.com" class="text-slate-900 dark:text-white hover:text-brand-primary underline underline-offset-4 transition-colors">hello@example.com</a>
+                </p>
+            </div>
+        </div>
+
+        <footer class="border-t border-slate-200 dark:border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                 <div class="w-8 h-8 bg-slate-200 dark:bg-white/5 rounded-lg flex items-center justify-center text-slate-900 dark:text-white">
+                    <i class="ph-bold ph-bezier-curve"></i>
                 </div>
+                <span class="font-bold text-slate-700 dark:text-gray-300">VisualsByMarvin.</span>
+            </div>
+            
+            <p class="text-sm text-slate-500 dark:text-gray-600">© 2025 VisualsByMarvin. All rights reserved.</p>
+
+            <div class="flex gap-6 text-xl text-slate-400 dark:text-gray-400">
+                <a href="#" class="hover:text-brand-primary dark:hover:text-white hover:scale-110 transition-all"><i class="ph-fill ph-twitter-logo"></i></a>
+                <a href="#" class="hover:text-brand-primary dark:hover:text-white hover:scale-110 transition-all"><i class="ph-fill ph-linkedin-logo"></i></a>
+                <a href="#" class="hover:text-brand-primary dark:hover:text-white hover:scale-110 transition-all"><i class="ph-fill ph-instagram-logo"></i></a>
             </div>
         </footer>
 
     </main>
-
+    
     <script>
-        // Mobile Menu Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
+        if(themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+        if(themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
 
@@ -464,58 +589,12 @@
                 menu.classList.toggle('hidden');
             });
         }
-
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if(target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                    if(!menu.classList.contains('hidden')) {
-                        menu.classList.add('hidden');
-                    }
-                }
-            });
-        });
-
-        // Animation on Scroll
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-slide-up');
-                    entry.target.style.opacity = '1';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.bento-card').forEach((el, index) => {
-            el.style.animationDelay = `${index * 50}ms`;
-            el.style.opacity = '0';
-            observer.observe(el);
-        });
-
-        // --- NEW: TESTIMONIAL SLIDER SCRIPT ---
+        
+        // Reviews
         const reviews = [
-            {
-                text: "\"Vouch for this man, 10/10. All their work is legit, well done, and amazing.\"",
-                author: "Zalbus",
-                role: "Customer, NovaForge Studios",
-                initials: "AL"
-            },
-            {
-                text: "\"Huge vouch for this guy. Made a few designs for me and they were amazing.\"",
-                author: "Alex / Lofi",
-                role: "Customer, ByAlex.gg",
-                initials: "AL"
-            },
-            {
-                text: "\"I've known Marvin for many years now and watched him developing his creative skills, and I can 100% say that he has improved his skill a lot [...]\"",
-                author: "Alex",
-                role: "Individual",
-                initials: "A"
-            }
+            { text: "\"Vouch for this man, 10/10. All their work is legit, well done, and amazing.\"", author: "Zalbus", role: "Customer, NovaForge Studios", initials: "Z" },
+            { text: "\"Huge vouch for this guy. Made a few designs for me and they were amazing.\"", author: "Alex / Lofi", role: "Customer, ByAlex.gg", initials: "AL" },
+            { text: "\"I've known Marvin for many years now...\"", author: "Alex", role: "Individual", initials: "A" }
         ];
 
         let currentReviewIndex = 0;
@@ -523,30 +602,24 @@
         const reviewAuthor = document.getElementById('review-author');
         const reviewRole = document.getElementById('review-role');
         const reviewInitials = document.getElementById('review-initials');
-        const reviewContainers = document.querySelectorAll('.review-content');
 
         function switchReview() {
-            // Fade Out
-            reviewContainers.forEach(el => el.classList.add('opacity-0'));
-
+            reviewText.style.opacity = 0;
+            reviewAuthor.style.opacity = 0;
+            reviewRole.style.opacity = 0;
             setTimeout(() => {
-                // Update Data
                 currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
                 const review = reviews[currentReviewIndex];
-
                 reviewText.textContent = review.text;
                 reviewAuthor.textContent = review.author;
                 reviewRole.textContent = review.role;
                 reviewInitials.textContent = review.initials;
-
-                // Fade In
-                reviewContainers.forEach(el => el.classList.remove('opacity-0'));
-            }, 500); // Wait for fade out to finish (0.5s matches CSS)
+                reviewText.style.opacity = 1;
+                reviewAuthor.style.opacity = 1;
+                reviewRole.style.opacity = 1;
+            }, 500);
         }
-
-        // Change review every 5 seconds
         setInterval(switchReview, 5000);
-
     </script>
 </body>
 </html>
