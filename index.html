@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Portfolio</title>
+    <title>Design Portfolio - Marvin</title>
     <meta name="description" content="Portfolio of a Visual Designer">
     
-    <!-- TAILWIND CSS (Using CDN for portability) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- PHOSPHOR ICONS -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- CUSTOM CONFIGURATION -->
     <script>
         tailwind.config = {
             theme: {
@@ -26,14 +22,10 @@
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     },
                     colors: {
-                        // User Requested Palette
                         'page-bg': '#EFE6FF',
                         'page-text': '#605389',
-                        
-                        // Gradient Colors
                         'brand-start': '#614BDF',
                         'brand-end': '#BE82FF',
-
                         brand: {
                             50: '#F5F3FF',
                             100: '#EDE9FE',
@@ -42,7 +34,6 @@
                             600: '#7C3AED',
                             900: '#4C1D95',
                         },
-                        // Accents for Stats Cards
                         'stat-pink': '#FFA6A6',
                         'stat-blue': '#A6B1FF',
                     },
@@ -74,36 +65,19 @@
     </script>
 
     <style>
-        body {
-            scroll-behavior: smooth;
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #EFE6FF; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #C4B5FD; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #8B5CF6; 
-        }
+        body { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #EFE6FF; }
+        ::-webkit-scrollbar-thumb { background: #C4B5FD; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8B5CF6; }
 
-        /* Card Hover Effects */
-        .bento-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .bento-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .bento-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 15px -3px rgba(97, 75, 223, 0.1), 0 4px 6px -2px rgba(97, 75, 223, 0.05);
             border-color: #BE82FF;
         }
 
-        /* Custom Gradients */
         .text-gradient {
             background: linear-gradient(to right, #614BDF, #BE82FF);
             -webkit-background-clip: text;
@@ -112,30 +86,28 @@
             color: transparent;
         }
         
-        .bg-gradient-brand {
-            background: linear-gradient(to right, #614BDF, #BE82FF);
-        }
+        .bg-gradient-brand { background: linear-gradient(to right, #614BDF, #BE82FF); }
         
-        /* Marquee Mask */
         .marquee-mask {
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
+
+        /* Review Transition Class */
+        .review-content { transition: opacity 0.5s ease-in-out; }
+        .opacity-0 { opacity: 0; }
     </style>
 </head>
 <body class="bg-page-bg text-page-text antialiased selection:bg-[#BE82FF] selection:text-white">
 
-    <!-- NAVIGATION -->
     <nav class="fixed top-0 w-full z-50 bg-page-bg/90 backdrop-blur-md border-b border-white/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
                     <img src="images/My_Logo.svg" alt="Logo" class="w-8 h-8 object-contain">
                     <span class="font-bold text-lg tracking-tight text-page-text">VisualsByMarvin.</span>
-                </div>
+                </a>
 
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#work" class="text-sm font-medium text-page-text hover:text-[#614BDF] transition-colors">Work</a>
                     <a href="#services" class="text-sm font-medium text-page-text hover:text-[#614BDF] transition-colors">Services</a>
@@ -145,7 +117,6 @@
                     </a>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-page-text hover:text-[#614BDF] focus:outline-none">
                         <i class="ph ph-list text-2xl"></i>
@@ -153,7 +124,6 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-page-bg border-b border-white/50">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#work" class="block px-3 py-2 rounded-md text-base font-medium text-page-text hover:text-[#614BDF] hover:bg-white/50">Work</a>
@@ -164,31 +134,24 @@
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
     <main class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
 
-        <!-- NEW HERO SECTION -->
         <section class="relative pt-20 pb-24 flex flex-col items-center text-center">
             
-            <!-- My Logo -->
             <img src="images/My_Logo.svg" alt="My Logo" class="h-16 mb-10 hover:scale-105 transition-transform duration-300">
 
-            <!-- Sub Headline -->
             <p class="text-2xl md:text-3xl font-medium text-page-text mb-8">
                 Hi 👋 my name is Marvin & I'm
             </p>
 
-            <!-- Main Headline with Floating Element -->
             <div class="relative max-w-5xl mx-auto mb-10">
                 <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight text-page-text leading-tight">
                     Crafting 
                     <span class="relative inline-block mx-3">
-                        <!-- Purple Highlight Box -->
                         <span class="relative z-10 text-white px-4 py-1">Design</span>
                         <span class="absolute inset-0 bg-gradient-brand rounded-xl -rotate-2 top-1 bottom-1 left-0 right-0 z-0"></span>
                         <span class="absolute inset-0 bg-[#614BDF] rounded-xl rotate-1 z-0"></span>
                         
-                        <!-- Floating Client Chat Bubble -->
                         <div class="absolute top-[-5.5rem] -right-52 hidden md:block animate-slide-up z-20">
                             <img src="images/Bubble.svg" class="w-56 hover:-translate-y-2 hover:rotate-2 transition-all duration-300 drop-shadow-xl cursor-pointer" alt="Client Feedback">
                         </div>
@@ -198,15 +161,11 @@
                 </h1>
             </div>
 
-            <!-- Description -->
             <p class="max-w-3xl mx-auto text-xl text-page-text/80 leading-relaxed mb-16">
                 Experience in Graphic Design, Marketing Ads & interested in No-Code & AI-driven Web Development - this makes me your perfect partner.
             </p>
 
-            <!-- Stats Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mb-24">
-                
-                <!-- Card 1: Impressions (Purple) -->
                 <div class="bg-[#C4B5FD] rounded-3xl p-8 text-white text-left relative overflow-hidden group hover:scale-[1.02] transition-transform">
                     <div class="relative z-10">
                         <h3 class="text-4xl font-extrabold mb-2">1.080.865+</h3>
@@ -216,7 +175,6 @@
                     <i class="ph-bold ph-eye absolute right-6 top-1/2 -translate-y-1/2 text-white/30 text-8xl group-hover:scale-110 transition-transform"></i>
                 </div>
 
-                <!-- Card 2: Happy Clients (Blue/Periwinkle) -->
                 <div class="bg-[#A6B1FF] rounded-3xl p-8 text-white text-left relative overflow-hidden group hover:scale-[1.02] transition-transform">
                     <div class="relative z-10">
                         <h3 class="text-4xl font-extrabold mb-2">98%</h3>
@@ -226,7 +184,6 @@
                     <i class="ph-bold ph-smiley absolute right-6 top-1/2 -translate-y-1/2 text-white/30 text-8xl group-hover:scale-110 transition-transform"></i>
                 </div>
 
-                <!-- Card 3: Years Experience (Pink/Salmon) -->
                 <div class="bg-[#FFA6A6] rounded-3xl p-8 text-white text-left relative overflow-hidden group hover:scale-[1.02] transition-transform">
                     <div class="relative z-10">
                         <h3 class="text-4xl font-extrabold mb-2">6+</h3>
@@ -237,24 +194,14 @@
                 </div>
             </div>
 
-            <!-- Infinite Logo Marquee -->
             <div class="w-full max-w-5xl overflow-hidden marquee-mask">
                 <div class="flex items-center gap-12 w-max animate-scroll">
-                    <!-- Set 1 -->
                     <img src="images/SunDevs_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="SunDevs">
                     <img src="images/ByAlexgg_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ByAlexgg">
                     <img src="images/ChromieCraft_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ChromieCraft">
                     <img src="images/AzerothCore_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="AzerothCore">
                     <span class="text-xl font-bold text-gray-400">CHRC</span>
                     
-                    <!-- Set 2 (Duplicate for Loop) -->
-                    <img src="images/SunDevs_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="SunDevs">
-                    <img src="images/ByAlexgg_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ByAlexgg">
-                    <img src="images/ChromieCraft_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ChromieCraft">
-                    <img src="images/AzerothCore_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="AzerothCore">
-                    <span class="text-xl font-bold text-gray-400">CHRC</span>
-
-                    <!-- Set 3 (Extra Safety) -->
                     <img src="images/SunDevs_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="SunDevs">
                     <img src="images/ByAlexgg_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ByAlexgg">
                     <img src="images/ChromieCraft_Logo.png" class="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity" alt="ChromieCraft">
@@ -262,13 +209,9 @@
                     <span class="text-xl font-bold text-gray-400">CHRC</span>
                 </div>
             </div>
-
         </section>
 
-        <!-- PREVIOUS BENTO GRID SECTION (Now Secondary) -->
         <div id="about" class="grid grid-cols-1 md:grid-cols-12 gap-6 scroll-mt-24">
-            
-            <!-- Hero Card (Modified to fit below new hero) -->
             <div class="md:col-span-8 bento-card bg-white rounded-3xl p-8 border border-white/60 flex flex-col justify-between min-h-[300px] relative overflow-hidden group shadow-sm">
                 <div class="relative z-10 max-w-lg">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-page-bg text-[#614BDF] text-xs font-bold uppercase tracking-wider mb-4">
@@ -287,17 +230,12 @@
                         </a>
                     </div>
                 </div>
-                
-                <!-- Abstract Background Decoration -->
                 <div class="absolute -right-20 -bottom-40 w-80 h-80 bg-gradient-to-br from-[#614BDF] to-[#BE82FF] rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
             </div>
 
-            <!-- Profile/Stats Card (Top Right) -->
             <div class="md:col-span-4 flex flex-col gap-6">
-                <!-- Profile Snippet -->
                 <div class="bento-card bg-white rounded-3xl p-6 border border-white/60 flex-1 flex flex-col items-center text-center justify-center relative overflow-hidden shadow-sm">
                     <div class="w-24 h-24 rounded-full bg-page-bg mb-4 overflow-hidden border-4 border-white shadow-md relative z-10">
-                        <!-- Placeholder for User Image -->
                         <div class="w-full h-full bg-page-bg flex items-center justify-center text-[#614BDF]">
                            <i class="ph-fill ph-user text-4xl"></i>
                         </div>
@@ -313,9 +251,7 @@
             </div>
         </div>
 
-        <!-- SERVICES & TOOLS GRID -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="services">
-            <!-- Service 1 -->
             <div class="bento-card bg-white rounded-3xl p-6 border border-white/60 shadow-sm">
                 <div class="w-12 h-12 rounded-xl bg-page-bg text-[#614BDF] flex items-center justify-center mb-4">
                     <i class="ph-duotone ph-desktop text-2xl"></i>
@@ -326,7 +262,6 @@
                 </p>
             </div>
 
-            <!-- Service 2 -->
             <div class="bento-card bg-white rounded-3xl p-6 border border-white/60 shadow-sm">
                 <div class="w-12 h-12 rounded-xl bg-page-bg text-[#BE82FF] flex items-center justify-center mb-4">
                     <i class="ph-duotone ph-rocket text-2xl"></i>
@@ -337,20 +272,18 @@
                 </p>
             </div>
 
-            <!-- Tech Stack (Scrollable/List) -->
             <div class="bento-card bg-white rounded-3xl p-6 border border-white/60 flex flex-col shadow-sm">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-sm font-bold text-page-text/60 uppercase tracking-wider">My Toolkit</h3>
                     <span class="text-xs text-page-text/60 font-medium">Skill Level</span>
                 </div>
                 <div class="space-y-4">
-                    <!-- Figma (5/5) -->
                     <div class="flex items-center justify-between group cursor-default">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-lg bg-page-bg flex items-center justify-center"><i class="ph-fill ph-figma-logo text-[#614BDF] text-xl"></i></div>
                             <span class="font-medium text-page-text">Figma</span>
                         </div>
-                        <div class="flex gap-1" aria-label="5 out of 5 skill level">
+                        <div class="flex gap-1">
                             <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
                             <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
                             <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
@@ -358,14 +291,12 @@
                             <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
                         </div>
                     </div>
-
-                    <!-- Framer (4/5) -->
                     <div class="flex items-center justify-between group cursor-default">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-lg bg-page-bg flex items-center justify-center"><i class="ph-bold ph-framer-logo text-page-text text-xl"></i></div>
                             <span class="font-medium text-page-text">Framer</span>
                         </div>
-                        <div class="flex gap-1" aria-label="4 out of 5 skill level">
+                        <div class="flex gap-1">
                             <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
                             <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
                             <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
@@ -373,14 +304,12 @@
                             <div class="w-2 h-2 rounded-full bg-gray-200"></div>
                         </div>
                     </div>
-
-                    <!-- Photoshop (4/5) -->
                     <div class="flex items-center justify-between group cursor-default">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-lg bg-page-bg flex items-center justify-center"><i class="ph-fill ph-magic-wand text-[#BE82FF] text-xl"></i></div>
                             <span class="font-medium text-page-text">Photoshop</span>
                         </div>
-                        <div class="flex gap-1" aria-label="4 out of 5 skill level">
+                        <div class="flex gap-1">
                             <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
                             <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
                             <div class="w-2 h-2 rounded-full bg-gradient-brand"></div>
@@ -392,20 +321,17 @@
             </div>
         </div>
 
-        <!-- SELECTED WORK SECTION -->
         <div id="work">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-2xl font-bold text-page-text">Selected Work</h2>
-                <a href="#" class="text-sm font-medium text-[#614BDF] hover:text-[#BE82FF] flex items-center gap-1 transition-colors">
+                <a href="projects.html" class="text-sm font-medium text-[#614BDF] hover:text-[#BE82FF] flex items-center gap-1 transition-colors">
                     View all projects <i class="ph-bold ph-arrow-right"></i>
                 </a>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Project 1 -->
                 <div class="bento-card group bg-white rounded-3xl p-4 border border-white/60 cursor-pointer shadow-sm">
                     <div class="aspect-video w-full bg-page-bg rounded-2xl overflow-hidden relative mb-4">
-                        <!-- Project Image Placeholder -->
                         <div class="absolute inset-0 bg-gradient-to-tr from-[#EFE6FF] to-white flex items-center justify-center text-[#c4b5fd] group-hover:scale-105 transition-transform duration-500">
                              <i class="ph-fill ph-image text-4xl"></i>
                         </div>
@@ -423,10 +349,8 @@
                     </div>
                 </div>
 
-                <!-- Project 2 -->
                 <div class="bento-card group bg-white rounded-3xl p-4 border border-white/60 cursor-pointer shadow-sm">
                     <div class="aspect-video w-full bg-page-text rounded-2xl overflow-hidden relative mb-4">
-                        <!-- Project Image Placeholder -->
                         <div class="absolute inset-0 bg-gradient-to-tr from-[#605389] to-[#8d7eb8] flex items-center justify-center text-white/50 group-hover:scale-105 transition-transform duration-500">
                             <i class="ph-fill ph-circles-three-plus text-4xl"></i>
                         </div>
@@ -446,21 +370,15 @@
             </div>
         </div>
 
-        <!-- PROCESS & TESTIMONIALS -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             
-            <!-- Process (Left) -->
             <div class="md:col-span-7 bento-card bg-white rounded-3xl p-8 border border-white/60 flex flex-col justify-center shadow-sm">
                 <div class="mb-6">
                      <span class="text-[#614BDF] text-xs font-bold uppercase tracking-wider">How I Work</span>
                      <h2 class="text-2xl font-bold text-page-text mt-2">Design is a process, not just a result.</h2>
                 </div>
-                
                 <div class="space-y-6 relative">
-                    <!-- Vertical Line -->
                     <div class="absolute left-3.5 top-2 bottom-2 w-0.5 bg-page-bg"></div>
-
-                    <!-- Step 1 -->
                     <div class="relative pl-10">
                         <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-white border-2 border-[#BE82FF] flex items-center justify-center z-10">
                             <div class="w-2.5 h-2.5 rounded-full bg-[#614BDF]"></div>
@@ -468,8 +386,6 @@
                         <h4 class="font-bold text-page-text">Discovery</h4>
                         <p class="text-sm text-page-text/80 mt-1">Understanding the core problem, user needs, and business goals.</p>
                     </div>
-
-                    <!-- Step 2 -->
                     <div class="relative pl-10">
                         <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center z-10">
                             <div class="w-2.5 h-2.5 rounded-full bg-gray-300"></div>
@@ -477,8 +393,6 @@
                         <h4 class="font-bold text-page-text">Exploration</h4>
                         <p class="text-sm text-page-text/80 mt-1">Iterating on wireframes, user flows, and visual directions.</p>
                     </div>
-
-                    <!-- Step 3 -->
                     <div class="relative pl-10">
                         <div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center z-10">
                             <div class="w-2.5 h-2.5 rounded-full bg-gray-300"></div>
@@ -489,13 +403,12 @@
                 </div>
             </div>
 
-            <!-- Testimonial (Right) -->
             <div class="md:col-span-5 bento-card bg-gradient-brand rounded-3xl p-8 text-white relative overflow-hidden flex flex-col justify-between shadow-lg shadow-purple-500/20">
                 <div class="absolute top-0 right-0 p-8 opacity-10">
                     <i class="ph-fill ph-quotes text-8xl"></i>
                 </div>
                 
-                <div class="relative z-10">
+                <div class="relative z-10 review-content" id="review-container">
                     <div class="flex gap-1 text-white/80 mb-4">
                         <i class="ph-fill ph-star"></i>
                         <i class="ph-fill ph-star"></i>
@@ -503,24 +416,22 @@
                         <i class="ph-fill ph-star"></i>
                         <i class="ph-fill ph-star"></i>
                     </div>
-                    <p class="text-xl font-medium leading-relaxed mb-6">
+                    <p class="text-xl font-medium leading-relaxed mb-6" id="review-text">
                         "Alex transformed our vague ideas into a world-class product. The attention to detail and user-centric approach is unmatched."
                     </p>
                 </div>
                 
-                <div class="flex items-center gap-4 relative z-10">
-                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-bold">JD</div>
+                <div class="flex items-center gap-4 relative z-10 review-content" id="author-container">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-bold" id="review-initials">JD</div>
                     <div>
-                        <p class="font-bold">Jack Daniel</p>
-                        <p class="text-sm text-white/80">CEO, Xavier LLC</p>
+                        <p class="font-bold" id="review-author">Jack Daniel</p>
+                        <p class="text-sm text-white/80" id="review-role">CEO, Xavier LLC</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- CTA / CONTACT SECTION -->
         <div class="bento-card bg-[#2D2447] rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden shadow-sm" id="contact">
-            <!-- REPLACED EXTERNAL IMAGE WITH SELF-CONTAINED CLASS -->
             <div class="absolute inset-0 bg-noise-pattern opacity-10"></div>
             <div class="relative z-10 max-w-2xl mx-auto">
                 <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to build something amazing?</h2>
@@ -537,19 +448,18 @@
                 </form>
                 
                 <p class="mt-8 text-sm text-gray-400">
-                    Prefer email? <a href="mailto:hello@example.com" class="text-[#BE82FF] hover:text-[#e0c3fc] underline">contact.mavrble@gmail.com</a>
+                    Prefer email? <a href="mailto:contact.mavrble@gmail.com" class="text-[#BE82FF] hover:text-[#e0c3fc] underline">contact.mavrble@gmail.com</a>
                 </p>
             </div>
         </div>
 
-        <!-- FOOTER -->
         <footer class="border-t border-white/40 pt-8 pb-12">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center gap-2">
                      <div class="w-6 h-6 bg-gradient-brand rounded-md flex items-center justify-center text-white text-xs">
                         <i class="ph-bold ph-bezier-curve"></i>
                     </div>
-                    <span class="font-bold text-page-text">Portfolio.</span>
+                    <span class="font-bold text-page-text">VisualsByMarvin.</span>
                 </div>
                 
                 <div class="flex gap-6 text-sm text-page-text/70">
@@ -558,15 +468,14 @@
                     <a href="#" class="hover:text-[#614BDF] transition-colors">Instagram</a>
                 </div>
                 
-                <p class="text-sm text-page-text/50">© 2025 VisualsByMarvin - Marvin. All rights reserved.</p>
+                <p class="text-sm text-page-text/50">© 2025 VisualsByMarvin. All rights reserved.</p>
             </div>
         </footer>
 
     </main>
 
-    <!-- JS SECTION (If splitting, put this in script.js) -->
     <script>
-        // Mobile Menu Toggle Logic
+        // Mobile Menu Toggle
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
 
@@ -576,16 +485,13 @@
             });
         }
 
-        // Smooth Scroll for Anchor Links (Optional enhancement for Safari)
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if(target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    // Close mobile menu if open
+                    target.scrollIntoView({ behavior: 'smooth' });
                     if(!menu.classList.contains('hidden')) {
                         menu.classList.add('hidden');
                     }
@@ -593,13 +499,7 @@
             });
         });
 
-        // Simple Intersection Observer for Fade-in animations on scroll
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
+        // Animation on Scroll
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -608,15 +508,65 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        // Select elements to animate that aren't already animated
         document.querySelectorAll('.bento-card').forEach((el, index) => {
-            // Add a small delay based on index for staggering effect
             el.style.animationDelay = `${index * 50}ms`;
-            el.style.opacity = '0'; // Hide initially
+            el.style.opacity = '0';
             observer.observe(el);
         });
+
+        // --- NEW: TESTIMONIAL SLIDER SCRIPT ---
+        const reviews = [
+            {
+                text: "\"Marvin transformed our vague ideas into a world-class product. The attention to detail and user-centric approach is unmatched.\"",
+                author: "Jack Daniel",
+                role: "CEO, Xavier LLC",
+                initials: "JD"
+            },
+            {
+                text: "\"The branding update completely revitalized our social media presence. Sales increased by 40% in the first month alone.\"",
+                author: "Sarah Connor",
+                role: "Marketing Dir., TechCorp",
+                initials: "SC"
+            },
+            {
+                text: "\"Incredibly fast turnaround without sacrificing quality. Best product presentation deck we have ever used for investors.\"",
+                author: "Mike Ross",
+                role: "Founder, LegalZoom",
+                initials: "MR"
+            }
+        ];
+
+        let currentReviewIndex = 0;
+        const reviewText = document.getElementById('review-text');
+        const reviewAuthor = document.getElementById('review-author');
+        const reviewRole = document.getElementById('review-role');
+        const reviewInitials = document.getElementById('review-initials');
+        const reviewContainers = document.querySelectorAll('.review-content');
+
+        function switchReview() {
+            // Fade Out
+            reviewContainers.forEach(el => el.classList.add('opacity-0'));
+
+            setTimeout(() => {
+                // Update Data
+                currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+                const review = reviews[currentReviewIndex];
+
+                reviewText.textContent = review.text;
+                reviewAuthor.textContent = review.author;
+                reviewRole.textContent = review.role;
+                reviewInitials.textContent = review.initials;
+
+                // Fade In
+                reviewContainers.forEach(el => el.classList.remove('opacity-0'));
+            }, 500); // Wait for fade out to finish (0.5s matches CSS)
+        }
+
+        // Change review every 5 seconds
+        setInterval(switchReview, 5000);
+
     </script>
 </body>
 </html>
