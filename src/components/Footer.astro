@@ -1,0 +1,83 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
+const socials = site.socials.filter((s) => s.url);
+---
+
+<footer class="bg-ink text-paper relative mt-28 overflow-hidden rounded-t-[28px] sm:mt-40 sm:rounded-t-[44px]" id="contact">
+  <div class="wrap pt-20 pb-16 text-center sm:pt-28">
+    <p class="text-lime flex items-center justify-center gap-2 text-sm font-medium" data-reveal>
+      <Logo class="size-3.5" />
+      Open for internships & junior positions
+    </p>
+
+    <h2
+      class="display mt-6 text-[clamp(2.6rem,7vw,5.5rem)] leading-[0.98] tracking-[-0.035em]"
+      data-mask
+    >
+      <span class="mask"><span class="mi">Let's create</span></span>
+      <span class="mask"><span class="mi">something <span class="text-lime">together</span>.</span></span>
+    </h2>
+
+    <div class="mt-10 flex flex-col items-center gap-5 sm:mt-12" data-reveal>
+      <a href={`mailto:${site.email}`} class="btn btn-light btn-lg magnetic">
+        {site.email}
+        <svg class="arr size-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M4 12L12 4M12 4H5.5M12 4v6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+      {
+        socials.length > 0 && (
+          <ul class="text-paper/60 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            {socials.map((s) => (
+              <li>
+                <a class="u-link hover:text-paper transition-colors" href={s.url} target="_blank" rel="noopener noreferrer">
+                  {s.label} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+
+  {/* big outlined marquee */}
+  <div class="marquee mt-4 select-none" aria-hidden="true">
+    <div class="marquee-track">
+      {
+        [0, 1].map(() => (
+          <span class="display text-outline flex items-center gap-8 pr-8 text-[clamp(4rem,11vw,9rem)] leading-none whitespace-nowrap">
+            Let's talk <Logo class="text-lime size-[0.5em] shrink-0 opacity-80" /> visuals that convert
+            <Logo class="text-lime size-[0.5em] shrink-0 opacity-80" />
+          </span>
+        ))
+      }
+    </div>
+  </div>
+
+  {/* bottom bar — matches the sketch: © | links | Germany */}
+  <div class="border-paper/10 mt-10 border-t">
+    <div
+      class="wrap text-paper/60 flex flex-col items-center justify-between gap-3 py-6 pb-24 text-sm sm:flex-row sm:pb-22"
+    >
+      <p>{site.name} © {year}</p>
+      <p class="flex items-center gap-2">
+        <a href="/imprint/" class="u-link hover:text-paper transition-colors">Imprint</a>
+        <span aria-hidden="true">–</span>
+        <a href="/about/" class="u-link hover:text-paper transition-colors">About me</a>
+        <span aria-hidden="true">–</span>
+        <a href="#top" class="u-link hover:text-paper transition-colors" data-scroll-top>Back to top</a>
+      </p>
+      <p class="flex items-center gap-2">
+        <svg class="size-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+          <path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z" stroke="currentColor" stroke-width="1.5"></path>
+        </svg>
+        {site.location}
+      </p>
+    </div>
+  </div>
+</footer>

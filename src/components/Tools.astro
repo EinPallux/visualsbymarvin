@@ -1,0 +1,57 @@
+---
+import { siOpenai, siFramer } from 'simple-icons';
+
+/**
+ * "tools I work with…" row
+ * ------------------------------------------------------------
+ * ✏️ EDIT HERE: add/remove tools below. Two kinds exist:
+ *    - svg  → inline logo markup (see Figma/Framer/ChatGPT)
+ *    - text → Adobe-style letter tile (see Ps/Ai) — perfect for
+ *      any Adobe app: { kind:'text', label:'Ae', bg:'#00005B', fg:'#9999FF' }
+ */
+const tiles = [
+  { kind: 'svg', name: 'Figma', id: 'figma' },
+  { kind: 'svg', name: 'Framer', id: 'framer' },
+  { kind: 'text', name: 'Adobe Photoshop', label: 'Ps', bg: '#001E36', fg: '#31A8FF' },
+  { kind: 'text', name: 'Adobe Illustrator', label: 'Ai', bg: '#330000', fg: '#FF9A00' },
+  { kind: 'svg', name: 'ChatGPT', id: 'openai' },
+] as const;
+---
+
+<div class="mt-14 flex flex-col items-center gap-5 sm:mt-16">
+  <p class="text-soft text-xs tracking-[0.08em]" data-enter>tools I work with…</p>
+  <ul class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4">
+    {
+      tiles.map((t) => (
+        <li class="tool-chip" title={t.name}>
+          <span class="sr-only">{t.name}</span>
+          {t.kind === 'text' ? (
+            <span
+              class="flex size-7.5 items-center justify-center rounded-[8px] text-[13px] font-bold sm:size-11 sm:rounded-[11px] sm:text-[17px]"
+              style={`background:${t.bg};color:${t.fg}`}
+              aria-hidden="true"
+            >
+              {t.label}
+            </span>
+          ) : t.id === 'figma' ? (
+            <svg class="h-7.5 sm:h-11" viewBox="0 0 38 57" fill="none" aria-hidden="true">
+              <path fill="#1ABCFE" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0Z" />
+              <path fill="#0ACF83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0Z" />
+              <path fill="#FF7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19Z" />
+              <path fill="#F24E1E" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5Z" />
+              <path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5Z" />
+            </svg>
+          ) : t.id === 'framer' ? (
+            <svg class="h-7.5 p-0.5 sm:h-11" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#0055FF" d={siFramer.path} />
+            </svg>
+          ) : (
+            <svg class="size-7.5 sm:size-11" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#74AA9C" d={siOpenai.path} />
+            </svg>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</div>
