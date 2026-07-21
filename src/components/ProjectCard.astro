@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  index: number;
+}
+const { project, index } = Astro.props;
+const d = project.data;
+---
+
+<article class="group relative" data-card>
+  {/* stretched link — the whole card is clickable */}
+  <a
+    href={`/work/${project.id}/`}
+    class="absolute inset-0 z-10 rounded-3xl"
+    aria-label={`View project: ${d.title}`}
+    data-cursor="view"></a>
+
+  <div class="card-img aspect-[16/10]" data-card-img>
+    <Image
+      src={d.cover}
+      alt={d.coverAlt ?? `Cover of ${d.title}`}
+      widths={[480, 760, 1100, 1600]}
+      sizes="(min-width: 1024px) 44vw, 92vw"
+      loading={index < 2 ? 'eager' : 'lazy'}
+    />
+  </div>
+
+  <div class="mt-6 sm:mt-7">
+    <h3 class="display text-[1.55rem] leading-tight font-bold tracking-tight sm:text-[1.8rem]">
+      {d.title}
+    </h3>
+    <p class="text-soft mt-1.5 text-sm">{d.categories.join(' | ')}</p>
+    <p class="text-ink/75 mt-3 max-w-md text-[15px] leading-relaxed">{d.description}</p>
+    <span class="btn group-hover:bg-lime group-hover:text-ink mt-5" aria-hidden="true">
+      View Project
+      <svg class="arr size-3.5" viewBox="0 0 16 16" fill="none">
+        <path
+          d="M4 12L12 4M12 4H5.5M12 4v6.5"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </span>
+  </div>
+</article>

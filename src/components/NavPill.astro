@@ -1,0 +1,45 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+
+const path = Astro.url.pathname;
+const links = [
+  { label: 'Work', href: '/#work', active: path === '/' },
+  { label: 'About', href: '/about/', active: path.startsWith('/about') },
+];
+---
+
+<div class="navpill-wrap pointer-events-none fixed inset-x-0 bottom-4 z-50 flex justify-center px-4 sm:bottom-6">
+  <nav
+    class="navpill border-ink/8 pointer-events-auto flex items-center gap-0.5 rounded-full border bg-white/70 p-1.5 shadow-[0_2px_8px_rgb(20_20_19/0.05),0_20px_50px_-20px_rgb(20_20_19/0.35)] backdrop-blur-xl"
+    aria-label="Main navigation"
+  >
+    <a
+      href="/"
+      class="bg-ink text-lime magnetic mr-1 flex size-9 items-center justify-center rounded-full transition-transform hover:scale-105"
+      aria-label="Home"
+    >
+      <Logo class="size-4" />
+    </a>
+    {
+      links.map((l) => (
+        <a
+          href={l.href}
+          aria-current={l.active ? 'page' : undefined}
+          class:list={[
+            'rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-ink/6',
+            l.active && 'bg-ink/6',
+          ]}
+        >
+          {l.label}
+        </a>
+      ))
+    }
+    <a href={`mailto:${site.email}`} class="btn magnetic ml-1">
+      Let's talk
+      <svg class="arr size-3.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M4 12L12 4M12 4H5.5M12 4v6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </a>
+  </nav>
+</div>

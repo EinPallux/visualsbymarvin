@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+---
+
+<header class="topbar absolute inset-x-0 top-0 z-40">
+  <div class="wrap flex items-center justify-between py-5">
+    <a href="/" class="u-link text-sm font-semibold tracking-tight">
+      {site.name}
+      <span class="text-soft ml-2 hidden font-normal sm:inline">— {site.role}</span>
+    </a>
+    <div class="text-soft flex items-center gap-2.5 text-sm">
+      <span class="relative flex size-2">
+        <span class="bg-lime-ink absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+        ></span>
+        <span class="bg-lime-ink relative inline-flex size-2 rounded-full"></span>
+      </span>
+      <span class="text-ink font-medium">{site.availability}</span>
+      <span class="hidden sm:inline" aria-hidden="true">·</span>
+      <span class="hidden tabular-nums sm:inline"><span data-time>--:--</span> GER</span>
+    </div>
+  </div>
+</header>

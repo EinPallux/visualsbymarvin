@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+/**
+ * ⚠️ LEGAL PLACEHOLDER (Impressum)
+ * ✏️ EDIT HERE: fill in your real address before going live —
+ *    an Impressum with full contact data is required by German
+ *    law (§ 5 DDG) as soon as the site is public.
+ */
+---
+
+<Base title="Imprint" description={`Imprint / Impressum of ${site.name}.`}>
+  <section class="wrap max-w-2xl pt-32 pb-8 sm:pt-40">
+    <h1 class="display text-[clamp(2.4rem,6vw,4rem)] tracking-[-0.03em]">
+      <span class="mask"><span class="mi gate-mi">Imprint</span></span>
+    </h1>
+
+    <div class="text-ink/80 mt-10 space-y-8 leading-relaxed" data-enter>
+      <div>
+        <h2 class="text-ink mb-2 font-semibold">Angaben gemäß § 5 DDG</h2>
+        <p>
+          {site.name}<br />
+          [Straße Hausnummer]<br />
+          [PLZ Ort]<br />
+          Deutschland
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-ink mb-2 font-semibold">Kontakt</h2>
+        <p>
+          E-Mail: <a class="u-link font-medium" href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-ink mb-2 font-semibold">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+        <p>{site.name}, Anschrift wie oben.</p>
+      </div>
+
+      <div>
+        <h2 class="text-ink mb-2 font-semibold">Haftung für Links</h2>
+        <p>
+          Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen
+          Einfluss habe. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
+          verantwortlich.
+        </p>
+      </div>
+
+      <p class="text-soft text-sm">
+        Hinweis: Platzhalter in [Klammern] vor Veröffentlichung durch echte Angaben ersetzen.
+      </p>
+    </div>
+  </section>
+</Base>

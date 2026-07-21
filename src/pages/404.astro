@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="404 — Page not found">
+  <section class="wrap flex min-h-[68vh] flex-col items-center justify-center pt-24 text-center">
+    <p class="display text-lime text-[clamp(5rem,20vw,12rem)] leading-none font-bold tracking-[-0.04em]">
+      <span class="mask"><span class="mi gate-mi">404</span></span>
+    </p>
+    <p class="text-ink/75 mt-4 text-lg" data-enter>Nothing to see here — this page doesn't exist.</p>
+    <a href="/" class="btn mt-8" data-enter>
+      Back to home
+      <svg class="arr size-3.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M4 12L12 4M12 4H5.5M12 4v6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </a>
+  </section>
+</Base>

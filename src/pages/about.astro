@@ -1,0 +1,139 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import { site } from '../data/site';
+import { experience, education, type Station } from '../data/experience';
+import photo from '../assets/image_pill_me.png';
+
+/**
+ * ✏️ EDIT HERE:
+ *  - Bio texts: directly below in the markup
+ *  - Experience / Education entries: src/data/experience.ts
+ *  - "What I do" chips: the `doing` array below
+ */
+const doing = ['Product Design', 'Web Design', 'Branding', 'Social Media', 'AI Workflows'];
+---
+
+<Base title="About me" description={`About ${site.name} — ${site.role} from ${site.location}.`}>
+  <section class="wrap pt-32 sm:pt-40">
+    <p class="text-soft flex items-center gap-2 text-sm font-medium" data-enter>
+      <Logo class="text-lime-ink size-3.5" /> About me
+    </p>
+
+    <h1 class="display mt-4 text-[clamp(2.8rem,8vw,5.5rem)] leading-[0.98] tracking-[-0.04em]">
+      <span class="mask"><span class="mi gate-mi">Hey, I'm <span class="text-lime">Marvin</span>.</span></span>
+    </h1>
+
+    {/* wide portrait */}
+    <div class="mt-10 overflow-hidden rounded-[24px] sm:mt-14 sm:rounded-[32px]" data-cover>
+      <Image
+        src={photo}
+        alt={`Portrait of ${site.name}`}
+        class="block h-auto w-full"
+        widths={[640, 960, 1364]}
+        sizes="(min-width: 1152px) 1088px, 92vw"
+        loading="eager"
+      />
+    </div>
+
+    {/* facts + bio */}
+    <div class="mt-14 grid gap-12 sm:mt-20 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
+      <aside class="space-y-6 text-sm" data-reveal>
+        {
+          [
+            ['Based in', site.location],
+            ['Focus', 'Visual & Product Design'],
+            ['Status', site.availability],
+          ].map(([k, v]) => (
+            <div class="border-ink/10 flex items-baseline justify-between gap-4 border-b pb-3">
+              <span class="text-soft">{k}</span>
+              <span class="text-ink text-right font-medium">{v}</span>
+            </div>
+          ))
+        }
+        <a href={`mailto:${site.email}`} class="btn mt-2">
+          Get in touch
+          <svg class="arr size-3.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 12L12 4M12 4H5.5M12 4v6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </a>
+      </aside>
+
+      <div>
+        <p class="display text-[clamp(1.35rem,2.6vw,1.8rem)] leading-snug font-semibold tracking-[-0.02em]" data-reveal>
+          I design bold, clear visuals — landing pages, brands and small products that feel alive
+          and actually <span class="text-lime-ink">convert</span>.
+        </p>
+        <div class="text-ink/75 mt-6 max-w-xl space-y-4 leading-relaxed" data-reveal>
+          <p>
+            I'm a junior creative designer from {site.location}. I care about honest typography,
+            strong layouts and the small details that make a design feel considered — and I'm not
+            afraid to throw a first idea away when a better one shows up.
+          </p>
+          <p>
+            Right now I'm looking for a team where I can learn fast, take responsibility early and
+            ship real work. If that sounds like you, my inbox is open.
+          </p>
+        </div>
+        <ul class="mt-8 flex flex-wrap gap-2.5" data-reveal>
+          {
+            doing.map((d) => (
+              <li class="border-ink/12 text-ink/80 rounded-full border bg-white/60 px-4 py-1.5 text-sm font-medium">
+                {d}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    {/* experience */}
+    <div class="mt-24 sm:mt-32">
+      <h2 class="display text-[clamp(1.9rem,4vw,2.8rem)] tracking-[-0.03em]" data-mask>
+        <span class="mask"><span class="mi">Experience</span></span>
+      </h2>
+      <ol class="mt-8">
+        {
+          experience.map((s: Station) => (
+            <li
+              class="border-ink/10 grid gap-1 border-t py-6 sm:grid-cols-[170px_1fr] sm:gap-6 sm:py-7"
+              data-reveal
+            >
+              <p class="text-soft text-sm tabular-nums sm:pt-1">{s.period}</p>
+              <div>
+                <h3 class="text-lg font-semibold tracking-tight">{s.role}</h3>
+                <p class="text-soft mt-0.5 text-[15px]">{s.company}</p>
+                {s.note && <p class="text-ink/70 mt-2 max-w-xl text-[15px] leading-relaxed">{s.note}</p>}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    {/* education */}
+    <div class="mt-16 sm:mt-20">
+      <h2 class="display text-[clamp(1.9rem,4vw,2.8rem)] tracking-[-0.03em]" data-mask>
+        <span class="mask"><span class="mi">Education</span></span>
+      </h2>
+      <ol class="mt-8">
+        {
+          education.map((s: Station) => (
+            <li
+              class="border-ink/10 grid gap-1 border-t py-6 sm:grid-cols-[170px_1fr] sm:gap-6 sm:py-7"
+              data-reveal
+            >
+              <p class="text-soft text-sm tabular-nums sm:pt-1">{s.period}</p>
+              <div>
+                <h3 class="text-lg font-semibold tracking-tight">{s.role}</h3>
+                <p class="text-soft mt-0.5 text-[15px]">{s.company}</p>
+                {s.note && <p class="text-ink/70 mt-2 max-w-xl text-[15px] leading-relaxed">{s.note}</p>}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</Base>

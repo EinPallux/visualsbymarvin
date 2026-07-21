@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import TopBar from '../components/TopBar.astro';
+import NavPill from '../components/NavPill.astro';
+import Footer from '../components/Footer.astro';
+import Cursor from '../components/Cursor.astro';
+import Grain from '../components/Grain.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = site.description } = Astro.props;
+const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.role}`;
+const ogImage = new URL('/og.jpg', Astro.site ?? Astro.url);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f1f0ed" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {/* mark JS as available before first paint (enables animation initial states) */}
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
+    <ClientRouter />
+  </head>
+  <body id="top" class="min-h-screen">
+    <a class="skip" href="#main">Skip to content</a>
+    <Grain />
+    <Cursor />
+    <TopBar />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <NavPill />
+    <script>
+      import '../scripts/app.js';
+    </script>
+  </body>
+</html>

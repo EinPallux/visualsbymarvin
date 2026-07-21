@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Tools from '../components/Tools.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Logo from '../components/Logo.astro';
+import { site } from '../data/site';
+import heroPhoto from '../assets/image_pill_me.png';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft && data.featured)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<Base>
+  {/* ================= HERO ================= */}
+  <section class="wrap flex flex-col items-center pt-24 text-center sm:pt-28">
+    <div class="hero-pill relative w-[min(340px,82vw)] overflow-hidden rounded-full sm:w-[420px]">
+      <Image
+        src={heroPhoto}
+        alt={`Portrait of ${site.name}`}
+        class="hero-pill-img block h-auto w-full"
+        widths={[420, 680, 1024, 1364]}
+        sizes="(min-width: 640px) 420px, 82vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+
+    <h1 class="display mt-8 leading-[0.98] font-bold sm:mt-10">
+      <span class="mask">
+        <span class="mi gate-mi block text-[clamp(3.3rem,11vw,6.5rem)] tracking-[-0.04em]">
+          I'm <span class="text-lime">Marvin</span>
+        </span>
+      </span>
+      <span class="mask">
+        <span class="mi gate-mi block text-[clamp(1.7rem,5.5vw,3.3rem)] font-semibold tracking-[-0.03em]">
+          Your <span class="text-lime">Creative</span> Designer
+        </span>
+      </span>
+    </h1>
+
+    <p class="text-ink/80 mt-7 max-w-md text-[1.05rem] leading-relaxed text-balance sm:text-lg" data-enter>
+      Junior Creative Designer from {site.location} focused on creating visuals that
+      <span class="text-lime-ink font-semibold">convert</span>.
+    </p>
+
+    <Tools />
+  </section>
+
+  {/* ================= SELECTED WORK ================= */}
+  <section id="work" class="wrap mt-32 scroll-mt-24 sm:mt-44">
+    <div class="text-soft mx-auto flex max-w-5xl items-center justify-between text-sm" data-reveal>
+      <p class="text-ink flex items-center gap-2 font-medium">
+        <Logo class="text-lime-ink size-3.5" />
+        Selected Work
+      </p>
+      <p class="tabular-nums">({String(projects.length).padStart(2, '0')})</p>
+    </div>
+
+    <div class="mx-auto mt-8 grid max-w-5xl gap-x-10 gap-y-16 sm:mt-10 sm:gap-y-24 lg:grid-cols-2">
+      {projects.map((project, index) => <ProjectCard {project} {index} />)}
+    </div>
+  </section>
+</Base>

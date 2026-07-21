@@ -1,0 +1,15 @@
+---
+/** Small asterisk brand mark ✳ — used in nav, footer & favicon */
+interface Props {
+  class?: string;
+}
+const { class: className = 'size-4' } = Astro.props;
+---
+
+<svg class={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <g stroke="currentColor" stroke-width="3.2" stroke-linecap="round">
+    <path d="M12 3v18"></path>
+    <path d="M4.2 7.5l15.6 9"></path>
+    <path d="M19.8 7.5l-15.6 9"></path>
+  </g>
+</svg>
