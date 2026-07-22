@@ -23,11 +23,35 @@ import { site } from '../data/site';
       </div>
 
       {/* smooth ⇄ instant scroll toggle */}
-      <div class="scroll-ctl flex items-center gap-2">
-        <span class="text-soft hidden text-xs lg:inline">Scroll</span>
+      <div class="scroll-ctl">
         <div class="scroll-toggle" data-active="smooth" role="group" aria-label="Scroll mode">
-          <button type="button" data-scroll-mode="smooth" aria-pressed="true">Smooth</button>
-          <button type="button" data-scroll-mode="instant" aria-pressed="false">Instant</button>
+          <button
+            type="button"
+            data-scroll-mode="smooth"
+            aria-pressed="true"
+            aria-label="Smooth scrolling"
+            title="Smooth scrolling"
+          >
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M3 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <button
+            type="button"
+            data-scroll-mode="instant"
+            aria-pressed="false"
+            aria-label="Instant scrolling"
+            title="Instant scrolling"
+          >
+            <svg class="size-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M13 2 L3 14 h9 l-1 8 l10 -12 h-9 l1 -8 Z"></path>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
