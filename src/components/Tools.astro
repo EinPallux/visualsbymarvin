@@ -2,56 +2,73 @@
 import { siOpenai, siClaude } from 'simple-icons';
 
 /**
- * "tools I work with…" row
+ * FLOATING TOOL ICONS (hero)
  * ------------------------------------------------------------
- * ✏️ EDIT HERE: add/remove tools below. Two kinds exist:
- *    - svg  → inline logo markup (see Figma/Claude/ChatGPT)
- *    - text → Adobe-style letter tile (see Ps/Ai) — perfect for
- *      any Adobe app: { kind:'text', label:'Ae', bg:'#00005B', fg:'#9999FF' }
+ * These icons float/orbit around the hero title. Each one gently
+ * bobs (CSS) and drifts with the cursor (JS parallax, desktop).
+ *
+ * ✏️ EDIT HERE:
+ *   • Add / remove tools in the `tiles` array below.
+ *   • kind:'svg'  → inline logo (Figma / Claude / ChatGPT)
+ *     kind:'text' → Adobe-style letter tile (Ps / Ai …)
+ *   • Position on desktop = `dx` (from left) + `dy` (from top).
+ *     On phones the icons ignore dx/dy and sit in a row at the
+ *     bottom of the hero instead.
+ *   • dur/delay/rot/amp just vary the floating motion so the
+ *     icons don't move in sync — tweak freely or leave as is.
  */
 const tiles = [
-  { kind: 'svg', name: 'Figma', id: 'figma' },
-  { kind: 'svg', name: 'Claude', id: 'claude' },
-  { kind: 'text', name: 'Adobe Photoshop', label: 'Ps', bg: '#001E36', fg: '#31A8FF' },
-  { kind: 'text', name: 'Adobe Illustrator', label: 'Ai', bg: '#330000', fg: '#FF9A00' },
-  { kind: 'svg', name: 'ChatGPT', id: 'openai' },
+  { kind: 'svg', name: 'Figma', id: 'figma',
+    dx: '8%', dy: '25%', dur: '6.5s', delay: '0s', rot: '6deg', amp: '-14px' },
+  { kind: 'svg', name: 'ChatGPT', id: 'openai',
+    dx: '82%', dy: '19%', dur: '7.5s', delay: '.6s', rot: '-5deg', amp: '-12px' },
+  { kind: 'text', name: 'Adobe Photoshop', label: 'Ps', bg: '#001E36', fg: '#31A8FF',
+    dx: '6%', dy: '72%', dur: '5.8s', delay: '.3s', rot: '5deg', amp: '-16px' },
+  { kind: 'text', name: 'Adobe Illustrator', label: 'Ai', bg: '#330000', fg: '#FF9A00',
+    dx: '84%', dy: '76%', dur: '8s', delay: '.9s', rot: '-6deg', amp: '-11px' },
+  { kind: 'svg', name: 'Claude', id: 'claude',
+    dx: '47%', dy: '90%', dur: '6.9s', delay: '1.2s', rot: '4deg', amp: '-15px' },
 ] as const;
+
+const styleFor = (t: (typeof tiles)[number]) =>
+  `--dx:${t.dx};--dy:${t.dy};--dur:${t.dur};--delay:${t.delay};--rot:${t.rot};--amp:${t.amp}`;
 ---
 
-<div class="mt-14 flex flex-col items-center gap-5 sm:mt-16">
-  <p class="text-soft text-xs tracking-[0.08em]" data-enter>tools I work with…</p>
-  <ul class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4">
-    {
-      tiles.map((t) => (
-        <li class="tool-chip" title={t.name}>
-          <span class="sr-only">{t.name}</span>
-          {t.kind === 'text' ? (
-            <span
-              class="flex size-7.5 items-center justify-center rounded-[8px] text-[13px] font-bold sm:size-11 sm:rounded-[11px] sm:text-[17px]"
-              style={`background:${t.bg};color:${t.fg}`}
-              aria-hidden="true"
-            >
-              {t.label}
-            </span>
-          ) : t.id === 'figma' ? (
-            <svg class="h-7.5 sm:h-11" viewBox="0 0 38 57" fill="none" aria-hidden="true">
-              <path fill="#1ABCFE" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0Z" />
-              <path fill="#0ACF83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0Z" />
-              <path fill="#FF7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19Z" />
-              <path fill="#F24E1E" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5Z" />
-              <path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5Z" />
-            </svg>
-          ) : t.id === 'claude' ? (
-            <svg class="size-7.5 sm:size-11" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="#D97757" d={siClaude.path} />
-            </svg>
-          ) : (
-            <svg class="size-7.5 sm:size-11" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="#74AA9C" d={siOpenai.path} />
-            </svg>
-          )}
-        </li>
-      ))
-    }
-  </ul>
-</div>
+<ul class="hero-tools" aria-label="Tools I work with">
+  {
+    tiles.map((t) => (
+      <li class="tool-float" style={styleFor(t)}>
+        <div class="tool-bob">
+          <span class="tool-chip" title={t.name}>
+            <span class="sr-only">{t.name}</span>
+            {t.kind === 'text' ? (
+              <span
+                class="flex size-7.5 items-center justify-center rounded-[8px] text-[13px] font-bold sm:size-9 sm:rounded-[10px] sm:text-[15px]"
+                style={`background:${t.bg};color:${t.fg}`}
+                aria-hidden="true"
+              >
+                {t.label}
+              </span>
+            ) : t.id === 'figma' ? (
+              <svg class="h-7 sm:h-9" viewBox="0 0 38 57" fill="none" aria-hidden="true">
+                <path fill="#1ABCFE" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0Z" />
+                <path fill="#0ACF83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0Z" />
+                <path fill="#FF7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19Z" />
+                <path fill="#F24E1E" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5Z" />
+                <path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5Z" />
+              </svg>
+            ) : t.id === 'claude' ? (
+              <svg class="size-7 sm:size-9" viewBox="0 0 24 24" fill="#D97757" aria-hidden="true">
+                <path d={siClaude.path} />
+              </svg>
+            ) : (
+              <svg class="size-7 sm:size-9" viewBox="0 0 24 24" fill="#74AA9C" aria-hidden="true">
+                <path d={siOpenai.path} />
+              </svg>
+            )}
+          </span>
+        </div>
+      </li>
+    ))
+  }
+</ul>

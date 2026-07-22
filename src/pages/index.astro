@@ -15,7 +15,9 @@ const projects = (await getCollection('projects', ({ data }) => !data.draft && d
 
 <Base>
   {/* ================= HERO ================= */}
-  <section class="wrap flex flex-col items-center pt-24 text-center sm:pt-28">
+  <section
+    class="hero-sec relative wrap flex flex-col items-center pt-24 pb-24 text-center sm:pt-28 md:min-h-[40rem] md:pb-16"
+  >
     <div class="hero-pill relative w-[min(340px,82vw)] overflow-hidden rounded-full sm:w-[420px]">
       <Image
         src={heroPhoto}
