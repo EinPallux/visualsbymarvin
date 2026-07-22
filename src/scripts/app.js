@@ -32,13 +32,61 @@ let lenis = null;
 let pageCtl = null; // aborts per-page listeners on navigation
 
 /* ============================================================
-   BOOT — runs once per real page load
+   SMOOTH SCROLL — lifecycle + user toggle
+   ------------------------------------------------------------
+   The top-bar toggle switches Lenis smooth scrolling on/off.
+   The choice is saved in localStorage; the default is smooth,
+   unless the OS asks to reduce motion.
    ============================================================ */
-if (!reduced) {
+const SCROLL_KEY = 'scrollMode';
+
+function readScrollPref() {
+  let stored = null;
+  try {
+    stored = localStorage.getItem(SCROLL_KEY);
+  } catch {}
+  if (stored === 'smooth') return true;
+  if (stored === 'instant') return false;
+  return !reduced; // sensible default
+}
+
+function lenisRaf(time) {
+  lenis && lenis.raf(time * 1000);
+}
+
+function enableSmooth() {
+  if (lenis) return;
   lenis = new Lenis({ lerp: 0.115 });
   lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((t) => lenis && lenis.raf(t * 1000));
+  gsap.ticker.add(lenisRaf);
   gsap.ticker.lagSmoothing(0);
+  lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+}
+
+function disableSmooth() {
+  if (!lenis) return;
+  gsap.ticker.remove(lenisRaf);
+  lenis.destroy();
+  lenis = null;
+  ScrollTrigger.refresh();
+}
+
+function applyScrollMode(smooth, persist) {
+  if (persist) {
+    try {
+      localStorage.setItem(SCROLL_KEY, smooth ? 'smooth' : 'instant');
+    } catch {}
+  }
+  if (smooth) enableSmooth();
+  else disableSmooth();
+  // reflect the state on every toggle currently in the DOM
+  $$('.scroll-toggle').forEach((t) => (t.dataset.active = smooth ? 'smooth' : 'instant'));
+  $$('.scroll-toggle [data-scroll-mode]').forEach((b) =>
+    b.setAttribute(
+      'aria-pressed',
+      b.dataset.scrollMode === (smooth ? 'smooth' : 'instant') ? 'true' : 'false'
+    )
+  );
 }
 
 /* ============================================================
@@ -60,6 +108,7 @@ function initPage() {
 
   initClock(signal);
   initAnchors(signal);
+  initScrollToggle(signal);
 
   if (reduced) {
     html.classList.add('booted');
@@ -330,10 +379,27 @@ function initAnchors(signal) {
         const target = hash === 'top' ? 0 : document.getElementById(hash);
         if (target === null) return;
         e.preventDefault();
-        if (lenis) lenis.scrollTo(target, { duration: 1.4 });
-        else if (target === 0) window.scrollTo({ top: 0, behavior: 'smooth' });
-        else target.scrollIntoView({ behavior: 'smooth' });
+        // smooth mode → eased Lenis scroll; instant/reduced → jump
+        if (lenis) {
+          lenis.scrollTo(target, { duration: 1.4 });
+        } else if (target === 0) {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        } else {
+          target.scrollIntoView({ behavior: 'instant' });
+        }
       },
+      { signal }
+    );
+  });
+}
+
+function initScrollToggle(signal) {
+  // apply the saved (or default) mode, then bind the buttons
+  applyScrollMode(readScrollPref(), false);
+  $$('.scroll-toggle [data-scroll-mode]').forEach((btn) => {
+    btn.addEventListener(
+      'click',
+      () => applyScrollMode(btn.dataset.scrollMode === 'smooth', true),
       { signal }
     );
   });

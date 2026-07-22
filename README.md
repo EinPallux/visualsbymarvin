@@ -120,6 +120,8 @@ All motion lives in `src/scripts/app.js` and is driven by small `data-` attribut
 
 Smooth scrolling, the custom cursor and all animations automatically switch off for users with `prefers-reduced-motion`, and the site is fully readable with JavaScript disabled.
 
+The **Smooth / Instant toggle** in the top bar lets any visitor turn the eased (Lenis) scrolling off in favour of native instant scrolling; the choice is remembered in their browser (`localStorage`). Default is smooth, or instant when the OS requests reduced motion.
+
 ---
 
 ## Deploying (free)
