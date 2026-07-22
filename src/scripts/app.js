@@ -35,10 +35,12 @@ let pageCtl = null; // aborts per-page listeners on navigation
    SMOOTH SCROLL — lifecycle + user toggle
    ------------------------------------------------------------
    The top-bar toggle switches Lenis smooth scrolling on/off.
-   The choice is saved in localStorage; the default is smooth,
-   unless the OS asks to reduce motion.
+   Smooth is the standard default; a visitor's own choice is then
+   remembered in localStorage. (The OS "reduce motion" setting is
+   respected — those users default to instant.)
    ============================================================ */
-const SCROLL_KEY = 'scrollMode';
+// bump the suffix if you ever want to reset everyone back to the default
+const SCROLL_KEY = 'scrollMode-v2';
 
 function readScrollPref() {
   let stored = null;
@@ -47,7 +49,7 @@ function readScrollPref() {
   } catch {}
   if (stored === 'smooth') return true;
   if (stored === 'instant') return false;
-  return !reduced; // sensible default
+  return !reduced; // default: smooth (unless the OS asks to reduce motion)
 }
 
 function lenisRaf(time) {
@@ -98,6 +100,12 @@ document.addEventListener('astro:before-swap', () => {
   ScrollTrigger.getAll().forEach((t) => t.kill());
 });
 document.addEventListener('astro:after-swap', () => {
+  // Astro resets <html>'s classes to the server-rendered set on every swap,
+  // dropping the classes our client code owns. Re-apply them before paint so
+  // e.g. the scroll toggle (gated on `.js`) stays visible on every page.
+  const cl = document.documentElement.classList;
+  cl.add('js');
+  if (lenis) cl.add('lenis', 'lenis-smooth');
   // keep Lenis in sync with the scroll position Astro restored
   lenis?.scrollTo(window.scrollY, { immediate: true, force: true });
 });
