@@ -1,17 +1,17 @@
 ---
-import { siOpenai, siFramer } from 'simple-icons';
+import { siOpenai, siClaude } from 'simple-icons';
 
 /**
  * "tools I work with…" row
  * ------------------------------------------------------------
  * ✏️ EDIT HERE: add/remove tools below. Two kinds exist:
- *    - svg  → inline logo markup (see Figma/Framer/ChatGPT)
+ *    - svg  → inline logo markup (see Figma/Claude/ChatGPT)
  *    - text → Adobe-style letter tile (see Ps/Ai) — perfect for
  *      any Adobe app: { kind:'text', label:'Ae', bg:'#00005B', fg:'#9999FF' }
  */
 const tiles = [
   { kind: 'svg', name: 'Figma', id: 'figma' },
-  { kind: 'svg', name: 'Framer', id: 'framer' },
+  { kind: 'svg', name: 'Claude', id: 'claude' },
   { kind: 'text', name: 'Adobe Photoshop', label: 'Ps', bg: '#001E36', fg: '#31A8FF' },
   { kind: 'text', name: 'Adobe Illustrator', label: 'Ai', bg: '#330000', fg: '#FF9A00' },
   { kind: 'svg', name: 'ChatGPT', id: 'openai' },
@@ -41,9 +41,9 @@ const tiles = [
               <path fill="#F24E1E" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5Z" />
               <path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5Z" />
             </svg>
-          ) : t.id === 'framer' ? (
-            <svg class="h-7.5 p-0.5 sm:h-11" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="#0055FF" d={siFramer.path} />
+          ) : t.id === 'claude' ? (
+            <svg class="size-7.5 sm:size-11" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#D97757" d={siClaude.path} />
             </svg>
           ) : (
             <svg class="size-7.5 sm:size-11" viewBox="0 0 24 24" aria-hidden="true">
