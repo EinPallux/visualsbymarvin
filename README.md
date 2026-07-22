@@ -27,7 +27,7 @@ npm run preview # preview the production build
 | Hero texts ("I'm Marvin", subline) | `src/pages/index.astro` |
 | About page bio texts | `src/pages/about.astro` |
 | **My photo** | `src/assets/image_pill_me.png` (just replace the file) |
-| Tools row (Figma, Ps, …) | `src/components/Tools.astro` |
+| Floating tool icons + their positions | `src/components/Tools.astro` |
 | **Colors & fonts** | `src/styles/global.css` (the `@theme` block at the top) |
 | Footer / CTA texts | `src/components/Footer.astro` |
 | Imprint (Impressum) | `src/pages/imprint.astro` |
@@ -117,6 +117,11 @@ All motion lives in `src/scripts/app.js` and is driven by small `data-` attribut
 | `data-card` / `data-card-img` | project card reveal + parallax + hover zoom |
 | `data-parallax` | gentle vertical parallax |
 | `.magnetic` | element sticks slightly to the cursor |
+| `.hero-tools` / `.tool-float` | tool icons that float around the hero title (bob + cursor parallax) |
+
+The floating hero icons orbit the title on desktop/tablet and fall back to a
+tidy row under the subtext on phones. Reposition or restyle them in
+`src/components/Tools.astro` (each icon's `dx`/`dy` = desktop position).
 
 Smooth scrolling, the custom cursor and all animations automatically switch off for users with `prefers-reduced-motion`, and the site is fully readable with JavaScript disabled.
 

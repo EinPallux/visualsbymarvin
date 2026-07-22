@@ -114,9 +114,9 @@ html.js:not(.booted) .hero-pill {
 html.js:not(.booted) .hero-pill-img {
   transform: scale(1.35);
 }
-html.js:not(.booted) .tool-chip {
+html.js:not(.booted) .tool-float {
   opacity: 0;
-  transform: translateY(16px) scale(0.9);
+  transform: translateY(40%) scale(0.85);
 }
 html.js:not(.booted) .navpill {
   opacity: 0;
@@ -135,7 +135,7 @@ html.js:not(.booted) [data-cover] {
   html.js:not(.booted) [data-enter],
   html.js:not(.booted) .hero-pill,
   html.js:not(.booted) .hero-pill-img,
-  html.js:not(.booted) .tool-chip,
+  html.js:not(.booted) .tool-float,
   html.js:not(.booted) .navpill,
   html.js:not(.booted) .topbar,
   html.js:not(.booted) [data-cover] {
@@ -287,6 +287,73 @@ html:not(.js) .scroll-ctl {
 .tool-chip:hover {
   transform: translateY(-6px) rotate(-3deg);
   box-shadow: var(--shadow-pill);
+}
+
+/* ----- floating tool icons around the hero title -----
+   Layer  (.hero-tools) : positions the icons  → parallax lives on .tool-float
+   Wrapper(.tool-float) : per-icon place + cursor drift (GSAP)
+   Bobber (.tool-bob)   : the endless gentle float (CSS)
+   Chip   (.tool-chip)  : the visual card + hover                            */
+.hero-tools {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 1.5rem;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  pointer-events: none; /* let clicks / text-selection pass through to the title */
+}
+.hero-tools .tool-chip {
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  pointer-events: auto;
+}
+.tool-bob {
+  animation: tool-bob var(--dur, 6s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform;
+}
+@keyframes tool-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translateY(var(--amp, -12px)) rotate(calc(var(--rot, 0deg) * -0.5));
+  }
+}
+@media (min-width: 768px) {
+  .hero-tools {
+    inset: 0; /* fill the hero so % positions map to the full height */
+    display: block;
+    gap: 0;
+  }
+  .tool-float {
+    position: absolute;
+    left: var(--dx);
+    top: var(--dy);
+  }
+  .hero-tools .tool-chip {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-tools .tool-chip {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tool-bob {
+    animation: none;
+  }
 }
 
 /* ----- project cards ----- */

@@ -117,6 +117,7 @@ function initPage() {
 
   initCursor(signal);
   initMagnetic(signal);
+  initToolFloat(signal);
 
   entrance(!html.classList.contains('booted'));
   initReveals();
@@ -135,7 +136,7 @@ function entrance(firstVisit) {
   const pillImg = $('.hero-pill-img');
   const masks = $$('.gate-mi');
   const enters = $$('[data-enter]');
-  const chips = $$('.tool-chip');
+  const floats = $$('.tool-float');
   const cover = $('[data-cover]');
 
   const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
@@ -150,7 +151,8 @@ function entrance(firstVisit) {
     // otherwise it stays as a residual translate after yPercent animates
     gsap.set(masks, { y: 0, yPercent: 115 });
     gsap.set(enters, { y: 26, opacity: 0 });
-    gsap.set(chips, { y: 16, opacity: 0, scale: 0.9 });
+    // yPercent (not y) so the JS cursor-parallax can add y in px later
+    gsap.set(floats, { yPercent: 40, opacity: 0, scale: 0.85 });
     gsap.set('.navpill', { y: 110, opacity: 0 });
     gsap.set('.topbar', { opacity: 0, y: -10 });
     if (cover) gsap.set(cover, { clipPath: 'inset(12% 4% round 40px)', y: 40 });
@@ -163,11 +165,11 @@ function entrance(firstVisit) {
     tl.to(masks, { yPercent: 0, duration: 1.15, stagger: 0.12 }, pill ? 0.35 : 0.15);
     if (cover) tl.to(cover, { clipPath: 'inset(0% 0% round 28px)', y: 0, duration: 1.2 }, 0.5);
     tl.to(enters, { y: 0, opacity: 1, duration: 0.9, stagger: 0.07 }, pill ? 0.65 : 0.4);
-    if (chips.length)
+    if (floats.length)
       tl.to(
-        chips,
-        { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.7)', stagger: 0.06 },
-        0.85
+        floats,
+        { yPercent: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.6)', stagger: 0.08 },
+        0.8
       );
     tl.to('.topbar', { opacity: 1, y: 0, duration: 0.8 }, 0.7);
     tl.to('.navpill', { y: 0, opacity: 1, duration: 0.9 }, 0.95);
@@ -184,11 +186,11 @@ function entrance(firstVisit) {
       );
     if (enters.length)
       tl.fromTo(enters, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.05 }, 0.1);
-    if (chips.length)
+    if (floats.length)
       tl.fromTo(
-        chips,
-        { y: 12, opacity: 0, scale: 0.94 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.6)', stagger: 0.05 },
+        floats,
+        { yPercent: 30, opacity: 0, scale: 0.9 },
+        { yPercent: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.6)', stagger: 0.05 },
         0.2
       );
   }
@@ -361,6 +363,42 @@ function initMagnetic(signal) {
       { signal }
     );
   });
+}
+
+/* ---- floating hero icons: gentle cursor parallax (desktop) ---- */
+function initToolFloat(signal) {
+  if (!finePointer) return;
+  const hero = $('.hero-sec');
+  const items = $$('.hero-tools .tool-float');
+  if (!hero || !items.length) return;
+
+  const movers = items.map((el, i) => ({
+    xTo: gsap.quickTo(el, 'x', { duration: 0.9, ease: 'power3' }),
+    yTo: gsap.quickTo(el, 'y', { duration: 0.9, ease: 'power3' }),
+    // alternate direction + vary strength so icons drift independently
+    depth: (i % 2 === 0 ? -1 : 1) * (0.6 + (i % 3) * 0.32),
+  }));
+  const clamp = (v) => Math.max(-0.6, Math.min(0.6, v));
+
+  hero.addEventListener(
+    'pointermove',
+    (e) => {
+      if (window.innerWidth < 768) return; // icons sit in a static row on phones
+      const r = hero.getBoundingClientRect();
+      const nx = clamp((e.clientX - (r.left + r.width / 2)) / r.width);
+      const ny = clamp((e.clientY - (r.top + r.height / 2)) / r.height);
+      movers.forEach((m) => {
+        m.xTo(nx * 48 * m.depth);
+        m.yTo(ny * 40 * m.depth);
+      });
+    },
+    { signal }
+  );
+  hero.addEventListener(
+    'pointerleave',
+    () => movers.forEach((m) => (m.xTo(0), m.yTo(0))),
+    { signal }
+  );
 }
 
 /* ============================================================
