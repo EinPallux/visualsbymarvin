@@ -5,7 +5,7 @@
    @theme block below. Change --color-lime to re-brand the site.
    ============================================================ */
 
-@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/parkinsans';
 @import '@fontsource-variable/instrument-sans';
 @import 'tailwindcss';
 
@@ -18,7 +18,7 @@
   --color-lime-ink: #65a30d; /* deeper accent for small text on light bg */
 
   /* -------- fonts -------- */
-  --font-display: 'Space Grotesk Variable', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Parkinsans Variable', 'Parkinsans', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Instrument Sans Variable', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
 
   /* -------- misc -------- */
