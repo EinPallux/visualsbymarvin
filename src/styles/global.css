@@ -200,6 +200,57 @@ html.js:not(.booted) [data-cover] {
   font-size: 1.05rem;
 }
 
+/* ----- scroll-mode toggle (top bar) ----- */
+html:not(.js) .scroll-ctl {
+  display: none; /* smooth scroll needs JS — hide the control without it */
+}
+.scroll-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid rgb(20 20 19 / 0.08);
+  background: rgb(255 255 255 / 0.55);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-chip);
+}
+.scroll-toggle::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  border-radius: 999px;
+  background: var(--color-ink);
+  transition: transform 0.42s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.scroll-toggle[data-active='instant']::before {
+  transform: translateX(100%);
+}
+.scroll-toggle button {
+  position: relative;
+  z-index: 1;
+  border-radius: 999px;
+  padding: 0.36rem 0.72rem;
+  font-size: 0.75rem;
+  font-weight: 550;
+  line-height: 1;
+  color: var(--color-soft);
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+.scroll-toggle button[aria-pressed='true'] {
+  color: var(--color-paper);
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-toggle::before {
+    transition: none;
+  }
+}
+
 /* ----- underline link ----- */
 .u-link {
   background-image: linear-gradient(currentColor, currentColor);

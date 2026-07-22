@@ -3,20 +3,33 @@ import { site } from '../data/site';
 ---
 
 <header class="topbar absolute inset-x-0 top-0 z-40">
-  <div class="wrap flex items-center justify-between py-5">
-    <a href="/" class="u-link text-sm font-semibold tracking-tight">
+  <div class="wrap flex items-center justify-between gap-3 py-5">
+    <a href="/" class="u-link shrink-0 text-sm font-semibold tracking-tight">
       {site.name}
       <span class="text-soft ml-2 hidden font-normal sm:inline">— {site.role}</span>
     </a>
-    <div class="text-soft flex items-center gap-2.5 text-sm">
-      <span class="relative flex size-2">
-        <span class="bg-lime-ink absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
-        ></span>
-        <span class="bg-lime-ink relative inline-flex size-2 rounded-full"></span>
-      </span>
-      <span class="text-ink font-medium">{site.availability}</span>
-      <span class="hidden sm:inline" aria-hidden="true">·</span>
-      <span class="hidden tabular-nums sm:inline"><span data-time>--:--</span> GER</span>
+
+    <div class="flex items-center gap-3 sm:gap-4">
+      {/* availability — hidden on phones so the toggle always fits */}
+      <div class="text-soft hidden items-center gap-2.5 text-sm sm:flex">
+        <span class="relative flex size-2">
+          <span class="bg-lime-ink absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+          ></span>
+          <span class="bg-lime-ink relative inline-flex size-2 rounded-full"></span>
+        </span>
+        <span class="text-ink font-medium">{site.availability}</span>
+        <span class="hidden lg:inline" aria-hidden="true">·</span>
+        <span class="hidden tabular-nums lg:inline"><span data-time>--:--</span> GER</span>
+      </div>
+
+      {/* smooth ⇄ instant scroll toggle */}
+      <div class="scroll-ctl flex items-center gap-2">
+        <span class="text-soft hidden text-xs lg:inline">Scroll</span>
+        <div class="scroll-toggle" data-active="smooth" role="group" aria-label="Scroll mode">
+          <button type="button" data-scroll-mode="smooth" aria-pressed="true">Smooth</button>
+          <button type="button" data-scroll-mode="instant" aria-pressed="false">Instant</button>
+        </div>
+      </div>
     </div>
   </div>
 </header>
