@@ -1,12 +1,12 @@
 ---
-title: 'Conjure'
-categories: ['Mobile App', 'Case Study']
-description: 'Concept case study for a playful marketplace app — from first user research and personas to a clickable prototype.'
-year: '2025'
-role: 'UX & UI Design'
-tools: ['Figma', 'Illustrator']
+title: 'YouTube Thumbnails'
+categories: ['YouTube', 'Social Media']
+description: 'YouTube Thumbnail Designs from my collection over the last time.'
+year: '2026'
+role: 'Creative Design'
+tools: ['Figma', 'ChatGPT']
 cover: './cover.jpg'
-coverAlt: 'Colorful preview of the Conjure mobile app case study'
+coverAlt: 'Preview of past Thumbnails'
 order: 1
 ---
 
