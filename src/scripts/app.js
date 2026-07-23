@@ -263,23 +263,25 @@ function initCards(signal) {
 
     if (!img) return;
 
+    // reveal zoom settles at a small baseline (1.06) that gives the drift
+    // just enough headroom — so a 16:9 cover is only cropped ~3% at rest
     gsap.fromTo(
       img,
-      { scale: 1.22 },
+      { scale: 1.2 },
       {
-        scale: 1,
+        scale: 1.06,
         duration: 1.5,
         ease: 'power3.out',
         scrollTrigger: { trigger: card, start: 'top 90%', once: true },
       }
     );
 
-    // parallax drift while the card passes through the viewport
+    // gentle parallax drift while the card passes through the viewport
     gsap.fromTo(
       img,
-      { yPercent: -5.5 },
+      { yPercent: -2.2 },
       {
-        yPercent: 5.5,
+        yPercent: 2.2,
         ease: 'none',
         scrollTrigger: { trigger: wrap, start: 'top bottom', end: 'bottom top', scrub: true },
       }
@@ -288,12 +290,12 @@ function initCards(signal) {
     if (finePointer) {
       card.addEventListener(
         'mouseenter',
-        () => gsap.to(img, { scale: 1.07, duration: 0.7, ease: 'power3.out' }),
+        () => gsap.to(img, { scale: 1.11, duration: 0.7, ease: 'power3.out' }),
         { signal }
       );
       card.addEventListener(
         'mouseleave',
-        () => gsap.to(img, { scale: 1, duration: 0.7, ease: 'power3.out' }),
+        () => gsap.to(img, { scale: 1.06, duration: 0.7, ease: 'power3.out' }),
         { signal }
       );
     }
