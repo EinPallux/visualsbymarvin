@@ -80,7 +80,9 @@ Only write text for the really important stuff — the images do the talking.
 ![Another image](./02.jpg)
 ```
 
-That's the whole system: **images with a few short sentences in between.** Every image you reference gets optimized automatically (WebP, responsive sizes). Wide images look best (≈1600px wide, covers in 16:10).
+That's the whole system: **images with a few short sentences in between.** Every image you reference gets optimized automatically (WebP, responsive sizes).
+
+**Cover images:** use a **16:9** ratio — **1600 × 900 px** is ideal (a YouTube-thumbnail export drops straight in). The card preview shows the whole cover with only a tiny (~3%) trim at the edges, so keep important text a little away from the very border. Inside-the-page images (the `![](...)` ones) can be any size — they show at full width, uncropped.
 
 The four demo projects (Conjure, TrialMatch, Epoch, Bionova) are placeholders — replace them with your real work.
 

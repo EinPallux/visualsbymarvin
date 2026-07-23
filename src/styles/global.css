@@ -374,12 +374,13 @@ html:not(.js) .scroll-ctl {
 }
 .card-img img {
   position: absolute;
-  left: 0;
-  top: -7%;
+  inset: 0;
   width: 100%;
-  height: 114%;
+  height: 100%;
   object-fit: cover;
   will-change: transform;
+  /* a 16:9 cover sits flush; the tiny baseline zoom + drift come from GSAP
+     (see initCards in app.js) and only crop ~2–3% so nothing important is cut */
 }
 
 /* ----- marquee ----- */
