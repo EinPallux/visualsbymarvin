@@ -4,7 +4,7 @@ categories: ['YouTube', 'Social Media']
 description: 'YouTube Thumbnail Designs from my collection over the last time.'
 year: '2026'
 role: 'Creative Design'
-tools: ['Figma', 'ChatGPT']
+tools: ['Figma', 'Photoshop', 'ChatGPT']
 cover: './cover.jpg'
 coverAlt: 'Preview of past Thumbnails'
 order: 1
