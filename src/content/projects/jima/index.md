@@ -1,12 +1,12 @@
 ---
-title: 'TrialMatch'
-categories: ['Product Design', 'Health']
-description: 'UX concept for an AI-powered clinical trial matching platform — clarity first, even in complex flows.'
-year: '2025'
-role: 'Product Design'
-tools: ['Figma', 'ChatGPT']
+title: 'Jima'
+categories: ['Motion Tool', 'SaaS']
+description: 'Jima is a a Motion Animation Tool made entirely in TypeScript with a giant 500+ Template Library to create Motion Animations without experience.'
+year: '2026'
+role: 'Creative Design / Development'
+tools: ['Figma', 'Claude']
 cover: './cover.jpg'
-coverAlt: 'Dashboard preview of the TrialMatch platform'
+coverAlt: 'Preview of the Jima Logo.'
 order: 2
 ---
 
