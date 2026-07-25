@@ -44,22 +44,8 @@ const socials = site.socials.filter((s) => s.url);
     </div>
   </div>
 
-  {/* big outlined marquee */}
-  <div class="marquee mt-4 select-none" aria-hidden="true">
-    <div class="marquee-track">
-      {
-        [0, 1].map(() => (
-          <span class="display text-outline flex items-center gap-8 pr-8 text-[clamp(4rem,11vw,9rem)] leading-none whitespace-nowrap">
-            Let's talk <Logo class="text-lime size-[0.5em] shrink-0 opacity-80" /> visuals that convert
-            <Logo class="text-lime size-[0.5em] shrink-0 opacity-80" />
-          </span>
-        ))
-      }
-    </div>
-  </div>
-
   {/* bottom bar — matches the sketch: © | links | Germany */}
-  <div class="border-paper/10 mt-10 border-t">
+  <div class="border-paper/10 mt-16 border-t">
     <div
       class="wrap text-paper/60 flex flex-col items-center justify-between gap-3 py-6 pb-24 text-sm sm:flex-row sm:pb-22"
     >
