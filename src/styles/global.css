@@ -422,67 +422,6 @@ html:not(.js) .scroll-ctl {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.14'/%3E%3C/svg%3E");
 }
 
-/* ----- custom cursor ----- */
-.cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 120;
-  width: 30px;
-  height: 30px;
-  border-radius: 999px;
-  border: 1.5px solid #fff;
-  mix-blend-mode: difference;
-  translate: -50% -50%;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  opacity: 0;
-  transition:
-    width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.35s,
-    border-color 0.35s,
-    opacity 0.3s;
-}
-.cursor-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--color-ink);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-@media (pointer: fine) {
-  .cursor {
-    display: flex;
-  }
-}
-.cursor.is-on {
-  opacity: 1;
-}
-.cursor.is-link {
-  width: 52px;
-  height: 52px;
-}
-.cursor.is-view {
-  width: 84px;
-  height: 84px;
-  background: var(--color-lime);
-  border-color: transparent;
-  mix-blend-mode: normal;
-}
-.cursor.is-view .cursor-label {
-  opacity: 1;
-  transition-delay: 0.12s;
-}
-.cursor.is-press {
-  scale: 0.8;
-}
-[data-cursor='view'] {
-  cursor: none;
-}
-
 /* ============================================================
    ARTICLE (markdown body of project pages)
    ============================================================ */

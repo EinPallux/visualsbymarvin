@@ -125,7 +125,7 @@ The floating hero icons orbit the title on desktop/tablet and fall back to a
 tidy row under the subtext on phones. Reposition or restyle them in
 `src/components/Tools.astro` (each icon's `dx`/`dy` = desktop position).
 
-Smooth scrolling, the custom cursor and all animations automatically switch off for users with `prefers-reduced-motion`, and the site is fully readable with JavaScript disabled.
+Smooth scrolling and all animations automatically switch off for users with `prefers-reduced-motion`, and the site is fully readable with JavaScript disabled.
 
 The **Smooth / Instant toggle** in the top bar lets any visitor turn the eased (Lenis) scrolling off in favour of native instant scrolling; the choice is remembered in their browser (`localStorage`). Default is smooth, or instant when the OS requests reduced motion.
 
