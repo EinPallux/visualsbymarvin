@@ -383,34 +383,6 @@ html:not(.js) .scroll-ctl {
      (see initCards in app.js) and only crop ~2–3% so nothing important is cut */
 }
 
-/* ----- marquee ----- */
-.marquee {
-  overflow: hidden;
-  white-space: nowrap;
-}
-.marquee-track {
-  display: inline-flex;
-  align-items: center;
-  width: max-content;
-  animation: marquee 26s linear infinite;
-}
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
-}
-
-/* outlined display text (footer marquee) */
-.text-outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgb(241 240 237 / 0.32);
-}
-
 /* ----- grain overlay ----- */
 .grain {
   position: fixed;
