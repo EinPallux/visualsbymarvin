@@ -18,7 +18,7 @@ export const experience: Station[] = [
     period: '2026 — Now',
     role: 'Graphic Designer | REMOTE',
     company: 'Adler Werbegeschenke, Saarbrücken, Germany',
-    note: 'My business partner hired me as a graphic designer on the Customer Service Art Team effective April 1, 2026 (after I completed my studies). Here, I work on customer logos and prepare them for printing and production at our factory.',
+    note: 'My internship partner hired me as a graphic designer on the Customer Service Art Team effective April 1, 2026 (after I completed my studies). Here, I work on customer logos and prepare them for printing and production at our factory.',
   },
   {
     period: '2022 — 2026',
