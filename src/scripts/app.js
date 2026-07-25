@@ -123,7 +123,6 @@ function initPage() {
     return;
   }
 
-  initCursor(signal);
   initMagnetic(signal);
   initToolFloat(signal);
 
@@ -317,39 +316,8 @@ function initParallax() {
 }
 
 /* ============================================================
-   CURSOR + MAGNETIC BUTTONS
+   MAGNETIC BUTTONS
    ============================================================ */
-function initCursor(signal) {
-  const cursor = $('.cursor');
-  if (!cursor || !finePointer) return;
-
-  const xTo = gsap.quickTo(cursor, 'x', { duration: 0.35, ease: 'power3' });
-  const yTo = gsap.quickTo(cursor, 'y', { duration: 0.35, ease: 'power3' });
-
-  window.addEventListener(
-    'pointermove',
-    (e) => {
-      xTo(e.clientX);
-      yTo(e.clientY);
-      cursor.classList.add('is-on');
-    },
-    { signal }
-  );
-  document.addEventListener(
-    'mouseover',
-    (e) => {
-      const view = e.target.closest?.('[data-cursor="view"]');
-      const link = e.target.closest?.('a, button');
-      cursor.classList.toggle('is-view', !!view);
-      cursor.classList.toggle('is-link', !!link && !view);
-    },
-    { signal }
-  );
-  document.addEventListener('mousedown', () => cursor.classList.add('is-press'), { signal });
-  document.addEventListener('mouseup', () => cursor.classList.remove('is-press'), { signal });
-  html.addEventListener('mouseleave', () => cursor.classList.remove('is-on'), { signal });
-}
-
 function initMagnetic(signal) {
   if (!finePointer) return;
   $$('.magnetic').forEach((el) => {
