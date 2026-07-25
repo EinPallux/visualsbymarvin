@@ -12,7 +12,7 @@ import photo from '../assets/image_pill_me.png';
  *  - Experience / Education entries: src/data/experience.ts
  *  - "What I do" chips: the `doing` array below
  */
-const doing = ['Product Design', 'Web Design', 'Branding', 'Social Media', 'AI Workflows'];
+const doing = ['Product Design', 'Ad Design', 'Branding', 'Social Media', 'AI Workflows'];
 ---
 
 <Base title="About me" description={`About ${site.name} — ${site.role} from ${site.location}.`}>
@@ -43,7 +43,7 @@ const doing = ['Product Design', 'Web Design', 'Branding', 'Social Media', 'AI W
         {
           [
             ['Based in', site.location],
-            ['Focus', 'Visual & Product Design'],
+            ['Focus', 'Visual & Creative Design'],
             ['Status', site.availability],
           ].map(([k, v]) => (
             <div class="border-ink/10 flex items-baseline justify-between gap-4 border-b pb-3">
@@ -63,7 +63,7 @@ const doing = ['Product Design', 'Web Design', 'Branding', 'Social Media', 'AI W
       <div>
         <p class="display text-[clamp(1.35rem,2.6vw,1.8rem)] leading-snug font-semibold tracking-[-0.02em]" data-reveal>
           I design bold, clear visuals — landing pages, brands and small products that feel alive
-          and actually <span class="text-lime-ink">convert</span>.
+          and actually <span class="text-lime-ink">work</span>.
         </p>
         <div class="text-ink/75 mt-6 max-w-xl space-y-4 leading-relaxed" data-reveal>
           <p>

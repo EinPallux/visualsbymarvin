@@ -16,18 +16,16 @@ export const site = {
 
   /** Browser tab + search engine description */
   description:
-    'Marvin Gehlen — Junior Creative Designer from Germany focused on creating visuals that convert.',
+    'Marvin Gehlen — Junior Creative Designer from Germany focused on creating visuals that work.',
 
   /** Small status badge (top right + footer) */
-  availability: 'Open for work',
+  availability: 'Currently Employeed',
 
   /**
    * Social links — leave the url empty ('') to hide a link.
    */
   socials: [
-    { label: 'LinkedIn', url: '' },
-    { label: 'Behance', url: '' },
-    { label: 'Dribbble', url: '' },
-    { label: 'Instagram', url: '' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/m-gehlen/' },
+    { label: 'Instagram', url: 'https://www.instagram.com/mavrble.dsgn' },
   ],
 };
