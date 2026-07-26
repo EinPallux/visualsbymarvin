@@ -33,9 +33,22 @@ const ogImage = new URL('/og.jpg', Astro.site ?? Astro.url);
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    {/* mark JS as available before first paint (enables animation initial states) */}
+    {/* Runs before first paint: marks JS as available (enables the animation
+        initial states) and applies the saved colour theme, so there is never
+        a flash of the wrong theme. */}
     <script is:inline>
-      document.documentElement.classList.add('js');
+      (() => {
+        const el = document.documentElement;
+        el.classList.add('js');
+        let theme;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        el.dataset.theme = theme;
+      })();
     </script>
 
     <ClientRouter />
