@@ -28,7 +28,8 @@ npm run preview # preview the production build
 | About page bio texts | `src/pages/about.astro` |
 | **My photo** | `src/assets/image_pill_me.png` (just replace the file) |
 | Floating tool icons + their positions | `src/components/Tools.astro` |
-| **Colors & fonts** | `src/styles/global.css` (the `@theme` block at the top) |
+| **Colors & fonts** (light mode) | `src/styles/global.css` (the `@theme` block at the top) |
+| **Dark mode colors** | `src/styles/global.css` (the `:root[data-theme='dark']` block right below `@theme`) |
 | Footer / CTA texts | `src/components/Footer.astro` |
 | Imprint (Impressum) | `src/pages/imprint.astro` |
 | Animations | `src/scripts/app.js` |
@@ -128,6 +129,19 @@ tidy row under the subtext on phones. Reposition or restyle them in
 Smooth scrolling and all animations automatically switch off for users with `prefers-reduced-motion`, and the site is fully readable with JavaScript disabled.
 
 The **Smooth / Instant toggle** in the top bar lets any visitor turn the eased (Lenis) scrolling off in favour of native instant scrolling; the choice is remembered in their browser (`localStorage`). Default is smooth, or instant when the OS requests reduced motion.
+
+The **Light / Dark toggle** sits next to it. The theme is applied before the page paints (so there is never a flash of the wrong theme) and is remembered in `localStorage`. Visitors who haven't chosen follow their operating system setting.
+
+Both palettes are plain CSS variables, so the whole site — including Tailwind classes like `text-ink/75` — adapts automatically. When adding new markup, use the semantic tokens instead of fixed colors:
+
+| Token | Use for |
+| --- | --- |
+| `paper` / `ink` | page background / main text (they swap in dark mode) |
+| `soft` | muted secondary text |
+| `lime` / `lime-ink` | the accent (big text / small text & icons) |
+| `on-lime` | text placed **on** a lime background (stays dark in both modes) |
+| `card` | raised surfaces: tool chips, nav pill, toggles |
+| `panel` / `panel-fg` | the dark footer block and its text |
 
 ---
 

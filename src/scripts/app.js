@@ -42,6 +42,55 @@ let pageCtl = null; // aborts per-page listeners on navigation
 // bump the suffix if you ever want to reset everyone back to the default
 const SCROLL_KEY = 'scrollMode-v2';
 
+/* ============================================================
+   COLOR THEME — light / dark
+   ------------------------------------------------------------
+   The theme is applied before first paint by the inline script in
+   Base.astro. Here we only handle the toggle + keeping the choice
+   across page navigations.
+   ============================================================ */
+const THEME_KEY = 'theme';
+let theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+
+function applyTheme(next, persist) {
+  theme = next === 'dark' ? 'dark' : 'light';
+  if (persist) {
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch {}
+    // crossfade the colours (skipped on first paint / navigation)
+    html.classList.add('theme-anim');
+    clearTimeout(applyTheme.t);
+    applyTheme.t = setTimeout(() => html.classList.remove('theme-anim'), 400);
+  }
+  html.dataset.theme = theme;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', theme === 'dark' ? '#0d0d0c' : '#f1f0ed');
+  $$('[data-theme-mode]').forEach((b) =>
+    b.setAttribute('aria-pressed', b.dataset.themeMode === theme ? 'true' : 'false')
+  );
+}
+
+function initTheme(signal) {
+  applyTheme(theme, false);
+  $$('[data-theme-mode]').forEach((btn) => {
+    btn.addEventListener('click', () => applyTheme(btn.dataset.themeMode, true), { signal });
+  });
+  // follow the OS while the visitor hasn't picked a theme themselves
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  mq.addEventListener(
+    'change',
+    (e) => {
+      let stored = null;
+      try {
+        stored = localStorage.getItem(THEME_KEY);
+      } catch {}
+      if (!stored) applyTheme(e.matches ? 'dark' : 'light', false);
+    },
+    { signal }
+  );
+}
+
 function readScrollPref() {
   let stored = null;
   try {
@@ -106,6 +155,7 @@ document.addEventListener('astro:after-swap', () => {
   const cl = document.documentElement.classList;
   cl.add('js');
   if (lenis) cl.add('lenis', 'lenis-smooth');
+  document.documentElement.dataset.theme = theme; // attributes are reset too
   // keep Lenis in sync with the scroll position Astro restored
   lenis?.scrollTo(window.scrollY, { immediate: true, force: true });
 });
@@ -117,6 +167,7 @@ function initPage() {
   initClock(signal);
   initAnchors(signal);
   initScrollToggle(signal);
+  initTheme(signal);
 
   if (reduced) {
     html.classList.add('booted');
